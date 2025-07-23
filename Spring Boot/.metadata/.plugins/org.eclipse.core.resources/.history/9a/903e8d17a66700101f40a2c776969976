@@ -1,0 +1,9 @@
+package com.example.demo.dto;
+
+public class UserAuth {
+	
+	private boolean present;
+	private int roleid;
+	
+	public UserAuth() {}
+}

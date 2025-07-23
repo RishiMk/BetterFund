@@ -1,0 +1,49 @@
+package com.example.demo.controllers;
+
+import com.example.demo.dto.*;
+import com.example.sessionauth.entity.User;
+import com.example.sessionauth.repository.UserRepository;
+import com.example.sessionauth.service.AuthService;
+
+import jakarta.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    @Autowired private AuthenticationManager authManager;
+    @Autowired private AuthService authService;
+    @Autowired private UserRepository userRepository;
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+        return authService.register(request);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request, HttpSession session) {
+        try {
+            Authentication auth = authManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            return ResponseEntity.ok("Login successful");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.ok("Logged out");
+    }
+}

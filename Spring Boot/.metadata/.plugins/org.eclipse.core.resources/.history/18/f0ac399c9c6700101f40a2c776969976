@@ -1,0 +1,66 @@
+package com.example.demo.config;
+
+import com.example.demo.repositories.UserRepository;
+import com.example.demo.entities.User;
+import org.springframework.context.annotation.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.config.annotation.authentication.configuration.*;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import static org.springframework.security.config.Customizer.withDefaults;
+
+import java.util.List;
+
+@Configuration
+public class SecurityConfig {
+
+    // ✅ Load user from DB using UserRepository
+	@Bean
+	public UserDetailsService userDetailsService(UserRepository repo) {
+	    return email -> {
+	        User user = repo.findByEmail(email)
+	                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+	        return new org.springframework.security.core.userdetails.User(
+	                user.getEmail(), // <–– Spring sees this as username
+	                user.getPassword(),
+	                List.of(new SimpleGrantedAuthority(user.getRole().getName()))
+	        );
+	    };
+	}
+
+    // ✅ Password encoder (use in registration too)
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    // ✅ Required to use AuthenticationManager in login controller
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/creator/**").hasRole("CAMPAIGN_CREATOR")
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form.disable())  // We use API login
+            .httpBasic(Customizer.withDefaults());
+
+        return http.build();
+    }
+
+
+}

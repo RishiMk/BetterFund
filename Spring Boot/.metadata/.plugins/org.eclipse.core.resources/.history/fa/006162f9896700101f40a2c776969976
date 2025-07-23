@@ -1,0 +1,13 @@
+package com.example.demo.entities;
+
+
+@Entity
+public class Role {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String name; // e.g. "ROLE_ADMIN", "ROLE_USER", "ROLE_CAMPAIGN_CREATOR"
+}
+

@@ -1,0 +1,37 @@
+package com.example.demo.services;
+
+
+import com.example.demo.dto.UserAuth;
+import com.example.demo.dto.UserLogin;
+import com.example.demo.entities.User;
+import com.example.demo.repositories.UserRepository;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthService {
+
+    @Autowired private UserRepository userRepository;
+
+	public Optional<UserAuth> getUser(UserLogin entity) {
+		
+	    Optional<User> userOpt = userRepository.findByEmailAndPassword(entity.getEmail(), entity.getPassword());
+	    return userRepository.findByEmailAndPassword(entity.getEmail(), entity.getPassword())
+	    		.map(user -> {
+	    			
+		    	UserAuth auth = new UserAuth();
+		    	auth.setPresent(true);
+		    	auth.setRoleId(user.getRole().getId());
+		    	return auth;
+		    	
+	    });
+	    
+	}
+    
+    
+
+    
+}

@@ -1,0 +1,53 @@
+package com.example.demo.services;
+
+
+import com.example.demo.dto.UserAuth;
+import com.example.demo.dto.UserLogin;
+import com.example.demo.repositories.UserRepository;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @Autowired private UserRepository userRepository;
+
+	public Optional<UserAuth> getUser(UserLogin entity) {
+
+	    return userRepository.findByEmailAndPassword(entity.getEmail(), entity.getPassword())
+	    	
+	    		.map(user -> {
+		    	UserAuth auth = new UserAuth();
+		    	auth.setPresent(true);
+		    	auth.setRoleId(user.getRole().getId());
+		    	return auth;
+		    	
+	    });	    
+	}
+	
+	public Optional<UserResponse> registerUser(UserRegister dto) {
+	    Optional<User> existing = userRepository.findByEmail(dto.getEmail());
+
+	    if (existing.isPresent()) {
+	        return Optional.empty(); // Email already exists
+	    }
+
+	    User user = new User();
+	    user.setEmail(dto.getEmail());
+	    user.setPassword(dto.getPassword()); // hash it in real apps!
+	    user.setName(dto.getName());
+
+	    // Set role from roleId
+	    Role role = roleRepository.findById(dto.getRoleId()).orElse(null);
+	    user.setRole(role);
+
+	    userRepository.save(user);
+
+	    return Optional.of(new UserResponse(true, "User registered successfully"));
+	}
+
+       
+}

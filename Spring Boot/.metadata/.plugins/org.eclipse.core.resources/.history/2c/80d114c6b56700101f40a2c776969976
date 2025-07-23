@@ -1,0 +1,7 @@
+public class RoleChangeRequest {
+    private Long senderRoleId;      // Role ID of the person trying to change
+    private String targetEmail;     // Email of user whose role is to be changed
+    private Long newRoleId;         // New role to assign
+
+    // Getters and setters
+}

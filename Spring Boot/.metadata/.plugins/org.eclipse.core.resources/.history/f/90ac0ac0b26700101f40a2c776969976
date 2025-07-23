@@ -1,0 +1,21 @@
+package com.example.demo.dto;
+
+public class UpdateUserRoleRequest {
+    private String email;  // ID of the user whose role is to be changed
+    private Integer newRoleId;
+    
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Integer getNewRoleId() {
+		return newRoleId;
+	}
+	public void setNewRoleId(Integer newRoleId) {
+		this.newRoleId = newRoleId;
+	}
+   
+
+}

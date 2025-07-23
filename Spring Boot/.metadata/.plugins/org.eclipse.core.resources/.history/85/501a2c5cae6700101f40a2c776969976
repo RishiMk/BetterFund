@@ -1,0 +1,35 @@
+package com.example.demo.controllers;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.dto.UserAuth;
+import com.example.demo.dto.UserLogin;
+import com.example.demo.services.AuthService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+	@Autowired
+	private AuthService service;
+	
+
+    @PostMapping("/login")
+    public ResponseEntity<UserAuth> loginUser(@RequestBody UserLogin entity) {
+        Optional<UserAuth> result = service.getUser(entity);
+
+        return result
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
+  
+}

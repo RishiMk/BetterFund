@@ -1,0 +1,11 @@
+public class UserResponse {
+    private boolean registered;
+    private String message;
+
+    public UserResponse(boolean registered, String message) {
+        this.registered = registered;
+        this.message = message;
+    }
+
+    // Getters and Setters
+}

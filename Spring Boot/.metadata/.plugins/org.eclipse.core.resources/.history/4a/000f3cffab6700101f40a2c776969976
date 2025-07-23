@@ -1,0 +1,49 @@
+package com.example.demo.services;
+
+
+import com.example.demo.dto.UserAuth;
+import com.example.demo.dto.UserLogin;
+import com.example.demo.entities.User;
+import com.example.demo.repositories.UserRepository;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthService {
+
+    @Autowired private UserRepository userRepository;
+
+	public Optional<UserAuth> getUser(UserLogin entity) {
+		
+	    Optional<User> userOpt = userRepository.findByEmailAndPassword(entity.getEmail(), entity.getPassword());
+	    return userOpt.map(user -> {
+	    	UserAuth auth = new UserAuth();
+	    	auth.setPresent(true);
+	    	auth.setRoleId(user.getRole().getId());
+	    	
+	    });
+	    
+	    if (userOpt.isPresent()) {
+	        User user = userOpt.get();
+	        
+	        UserAuth authorized = new UserAuth();
+	        authorized.setPresent(true);
+	        
+	        // Get Role ID from Role object inside User
+	        if (user.getRole() != null) {
+	            authorized.setRoleId(user.getRole().getId());
+	        }
+
+	        return Optional.of(authorized);
+	    }
+	    
+	    return Optional.empty();
+	}
+    
+    
+
+    
+}
