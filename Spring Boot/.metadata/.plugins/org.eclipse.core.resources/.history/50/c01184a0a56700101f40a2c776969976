@@ -1,8 +1,0 @@
-package com.example.demo.dto;
-
-
-public class UserLogin {
-	
-	String email;
-	String password;
-}

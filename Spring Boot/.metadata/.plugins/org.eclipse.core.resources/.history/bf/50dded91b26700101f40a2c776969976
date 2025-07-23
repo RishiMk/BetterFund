@@ -1,6 +1,0 @@
-public class UpdateUserRoleRequest {
-    private Long userId;  // ID of the user whose role is to be changed
-    private Long newRoleId;
-
-    // Getters and setters
-}

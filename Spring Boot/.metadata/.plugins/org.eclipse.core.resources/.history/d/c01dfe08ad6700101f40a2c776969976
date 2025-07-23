@@ -1,8 +1,0 @@
-public class UserRegister {
-    private String name;
-    private String email;
-    private String password;
-    private Long roleId;
-
-    // Getters and Setters
-}
