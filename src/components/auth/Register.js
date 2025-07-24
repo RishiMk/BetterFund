@@ -1,3 +1,4 @@
+// Register.js – final, cleaned-up version
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -8,19 +9,15 @@ export default function Register() {
         password: '',
         confirmPassword: '',
         phone: '',
-        address: ''
+        aadhar: ''
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+    const handleChange = (e) =>
+        setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,57 +25,64 @@ export default function Register() {
         setError('');
         setSuccess('');
 
+        /* ---------- client-side validation ---------- */
+        if (!formData.name || !formData.email || !formData.password ||
+            !formData.confirmPassword || !formData.phone || !formData.aadhar) {
+            setError('Please fill in all fields');
+            setLoading(false);
+            return;
+        }
+        if (formData.password !== formData.confirmPassword) {
+            setError('Passwords do not match');
+            setLoading(false);
+            return;
+        }
+        if (formData.password.length < 6) {
+            setError('Password must be at least 6 characters');
+            setLoading(false);
+            return;
+        }
+        if (!/^\d{12}$/.test(formData.aadhar)) {
+            setError('Aadhaar must be exactly 12 digits');
+            setLoading(false);
+            return;
+        }
+        if (!/^\d{10}$/.test(formData.phone)) {
+            setError('Phone must be exactly 10 digits');
+            setLoading(false);
+            return;
+        }
+        /* -------------------------------------------- */
+
         try {
-            // basic validation
-            if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-                throw new Error('Please fill in all fields');
-            }
-
-            if (formData.password !== formData.confirmPassword) {
-                throw new Error('Passwords do not match');
-            }
-
-            if (formData.password.length < 6) {
-                throw new Error('Password must be at least 6 characters long');
-            }
-
-            // check if email already exists
-            const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-            const userExists = existingUsers.find(user => user.email === formData.email);
-
-            if (userExists) {
-                throw new Error('Email already registered');
-            }
-
-            // create new user
-            const newUser = {
-                name: formData.name,
-                email: formData.email,
-                password: formData.password,
-                createdAt: new Date().toISOString()
-            };
-
-            // save to localStorage (in real app, this would be a database)
-            existingUsers.push(newUser);
-            localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
-
-            setSuccess('Registration successful! You can now login.');
-
-            // clear form
-            setFormData({
-                name: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                phone: '',
-                address: ''
+            const res = await fetch('http://localhost:8081/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    adharNo: formData.aadhar,
+                    phoneNo: formData.phone
+                })
             });
 
-            // redirect to login after 2 seconds
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000);
+            const data = await res.json();
+            if (!data.success) throw new Error(data.message || 'Registration failed');
 
+            /* ---- treat like login ---- */
+            const user = data.user;
+            localStorage.setItem('userLoggedIn', 'true');
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userName', user.username);
+            localStorage.setItem('userRole', user.role);
+            localStorage.setItem('userId', user.id.toString());
+            localStorage.setItem('adminLoggedIn', user.isAdmin ? 'true' : 'false');
+            localStorage.setItem('userType', user.isAdmin ? 'admin' : 'user');
+
+            window.dispatchEvent(new Event('loginStatusChanged'));
+            alert('Registration successful');
+            navigate(user.isAdmin ? '/admin/dashboard' : '/');
         } catch (err) {
             setError(err.message);
         } finally {
@@ -95,17 +99,8 @@ export default function Register() {
                         Join BetterFund and start making a difference in your community.
                     </p>
 
-                    {error && (
-                        <div className="error-message">
-                            {error}
-                        </div>
-                    )}
-
-                    {success && (
-                        <div className="success-message">
-                            {success}
-                        </div>
-                    )}
+                    {error && <div className="error-message">{error}</div>}
+                    {success && <div className="success-message">{success}</div>}
 
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -146,20 +141,26 @@ export default function Register() {
                                 onChange={handleChange}
                                 className="form-input"
                                 placeholder="Enter your phone number"
+                                maxLength="10"
+                                pattern="\d{10}"
                                 required
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="address" className="form-label">Address</label>
-                            <textarea
-                                id="address"
-                                name="address"
-                                value={formData.address}
+                            <label htmlFor="aadhar" className="form-label">Aadhaar Number</label>
+                            <input
+                                type="text"
+                                id="aadhar"
+                                name="aadhar"
+                                value={formData.aadhar}
                                 onChange={handleChange}
-                                className="form-textarea"
-                                placeholder="Enter your address (optional)"
-                                rows="3"
+                                className="form-input"
+                                placeholder="Enter 12-digit Aadhaar number"
+                                maxLength="12"
+                                pattern="\d{12}"
+                                title="12-digit Aadhaar number"
+                                required
                             />
                         </div>
 
@@ -210,7 +211,6 @@ export default function Register() {
                         </p>
                     </div>
 
-                    {/* terms and conditions */}
                     <div style={{
                         marginTop: '2rem',
                         padding: '1rem',
@@ -229,4 +229,4 @@ export default function Register() {
             </div>
         </div>
     );
-} 
+}
