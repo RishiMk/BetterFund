@@ -13,35 +13,51 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
 
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Map<String, String> registrationData) {
-        String username = registrationData.get("username");
-        String email = registrationData.get("email");
-        String password = registrationData.get("password");
-        String adharNo = registrationData.get("adharNo");
-        String phoneNo = registrationData.get("phoneNo");
+    public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
+        String username = body.get("username");
+        String email    = body.get("email");
+        String password = body.get("password");
+        String adharNo  = body.get("adharNo");
+        String phoneNo  = body.get("phoneNo");
 
-        // Validate required fields
-        if (username == null || email == null || password == null || 
-            adharNo == null || phoneNo == null) {
-            return ResponseEntity.badRequest().body("All fields are required");
+        // --- validation ---
+        if (username == null || email == null || password == null ||
+            adharNo == null  || phoneNo == null) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("success", false, "message", "All fields are required"));
+        }
+        if (!adharNo.matches("\\d{12}")) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("success", false, "message", "Adhar must be 12 digits"));
+        }
+        if (!phoneNo.matches("\\d{10}")) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("success", false, "message", "Phone must be 10 digits"));
         }
 
-        // Validate adhar number (12 digits)
-        if (adharNo.length() != 12 || !adharNo.matches("\\d+")) {
-            return ResponseEntity.badRequest().body("Adhar number must be 12 digits");
+        User user = userService.registerAndGetUser(username, email, password, adharNo, phoneNo);
+        if (user == null) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("success", false,
+                                 "message", "Registration failed – email/adhar/phone already exists"));
         }
 
-        // Validate phone number (10 digits)
-        if (phoneNo.length() != 10 || !phoneNo.matches("\\d+")) {
-            return ResponseEntity.badRequest().body("Phone number must be 10 digits");
-        }
-
-        boolean ok = userService.register(username, email, password, adharNo, phoneNo);
-        return ok ? ResponseEntity.ok("User registered successfully")
-            : ResponseEntity.badRequest().body("Registration failed - email, adhar, or phone already exists");
+        // success JSON
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "User registered successfully",
+                "user", Map.of(
+                        "id", user.getId(),
+                        "email", user.getEmail(),
+                        "username", user.getUsername(),
+                        "role", user.getRole().getName(),
+                        "isAdmin", user.getRole().getName().equalsIgnoreCase("ADMIN")
+                )
+        ));
     }
 
     @PostMapping("/login")
@@ -49,16 +65,32 @@ public class AuthController {
         String email = loginData.get("email");
         String password = loginData.get("password");
 
-        boolean ok = userService.login(email, password);
-        return ok ? ResponseEntity.ok("Logged in successfully")
-            : ResponseEntity.status(401).body("Invalid credentials");
+        User user = userService.loginAndGetUser(email, password);
+        if (user != null) {
+            return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "Logged in successfully",
+                    "user", Map.of(
+                            "id", user.getId(),
+                            "email", user.getEmail(),
+                            "username", user.getUsername(),
+                            "role", user.getRole().getName(),
+                            "isAdmin", user.getRole().getName().equalsIgnoreCase("ADMIN")
+                    )
+            ));
+        } else {
+            return ResponseEntity.status(401)
+                    .body(Map.of("success", false, "message", "Invalid credentials"));
+        }
     }
 
     @PostMapping("/admin/changerole")
     public ResponseEntity<?> changeRole(@RequestParam String targetEmail,
-                                      @RequestParam Integer newRoleId) {
+                                        @RequestParam Integer newRoleId) {
         boolean ok = userService.changeRole(targetEmail, newRoleId);
-        return ok ? ResponseEntity.ok("Role updated successfully")
-            : ResponseEntity.badRequest().body("Role update failed");
+        return ok
+                ? ResponseEntity.ok(Map.of("success", true, "message", "Role updated successfully"))
+                : ResponseEntity.badRequest()
+                      .body(Map.of("success", false, "message", "Role update failed"));
     }
 }

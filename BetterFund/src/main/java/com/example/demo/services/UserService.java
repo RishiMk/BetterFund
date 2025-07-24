@@ -53,6 +53,31 @@ public class UserService {
             .map(u -> encoder.matches(rawPassword, u.getPassword()))
             .orElse(false);
     }
+    
+    public User loginAndGetUser(String email, String password) {
+        return userRepository.findByEmail(email)
+                .filter(u -> encoder.matches(password, u.getPassword()))
+                .orElse(null);
+    }
+    
+    public User registerAndGetUser(String username, String email, String password, String adharNo, String phoneNo) {
+    	if (userRepository.existsByEmail(email) || userRepository.existsByAdharNo(adharNo) || userRepository.existsByPhoneNo(phoneNo)) {
+    		return null;
+    	}
+
+    	User u = new User();
+    	u.setUsername(username);
+    	u.setEmail(email);
+    	u.setPassword(encoder.encode(password));
+    	u.setAdharNo(adharNo);
+    	u.setPhoneNo(phoneNo);
+
+    	// assign default role (make sure this is NOT admin!)
+    	Role userRole = roleRepository.findByName("Donor").orElseThrow(() -> new RuntimeException("Default role Donor not found"));
+    	u.setRole(userRole);
+
+    	return userRepository.save(u);
+    }
 
     public boolean changeRole(String targetEmail, Integer newRoleId) {
         User user = userRepository.findByEmail(targetEmail).orElse(null);
