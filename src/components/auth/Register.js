@@ -99,9 +99,6 @@ export default function Register() {
                         Join BetterFund and start making a difference in your community.
                     </p>
 
-                    {error && <div className="error-message">{error}</div>}
-                    {success && <div className="success-message">{success}</div>}
-
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="name" className="form-label">Full Name</label>
@@ -191,6 +188,9 @@ export default function Register() {
                                 required
                             />
                         </div>
+
+                    {error && <div className="error-message">{error}</div>}
+                    {success && <div className="success-message">{success}</div>}
 
                         <button
                             type="submit"
