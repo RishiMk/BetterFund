@@ -43,7 +43,7 @@ public class AuthController {
         if (user == null) {
             return ResponseEntity.badRequest()
                     .body(Map.of("success", false,
-                                 "message", "Registration failed – email/adhar/phone already exists"));
+                                 "message", "Registration failed – Account already exists. Please Login"));
         }
 
         // success JSON
