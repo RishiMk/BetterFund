@@ -43,7 +43,15 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             <div className="nav-container">
-                <Link to="/" className="nav-logo">🤝 BetterFund</Link>
+                <Link to="/" className="nav-logo">
+                <table>
+                    <tr>
+                        <td><img src='/BetterFundLogo.png' alt="Website Logo" width="50" height="50"/></td>
+                        <td>BetterFund</td>
+                    </tr>
+                </table>
+                
+                </Link>
 
                 <div className="nav-links">
                     <Link to="/" className="nav-link">Home</Link>
