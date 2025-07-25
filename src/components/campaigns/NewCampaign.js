@@ -102,6 +102,17 @@ export default function NewCampaign() {
                         <label className="form-label">Target Amount (₹)</label>
                         <input
                             type="number"
+                            min={0}
+                            onKeyDown={(e) => {
+                                const allowedKeys = [
+                                'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'
+                                ];
+                                const isNumber = /^\d$/.test(e.key);
+
+                                if (!isNumber && !allowedKeys.includes(e.key)) {
+                                e.preventDefault();
+                                }
+                            }}
                             name="target"
                             value={formInput.target}
                             onChange={handleInput}
