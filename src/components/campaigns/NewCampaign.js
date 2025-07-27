@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewCampaign() {
@@ -7,17 +7,14 @@ export default function NewCampaign() {
         name: '',
         description: '',
         target: '',
-        imageURL: '',
-        category: 'Community'
+        category: 'Community',
+        startDate: '',
+        endDate: ''
     });
+    const [documentFile, setDocumentFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const categories = [
-        'Medical',
-        'Education',
-        'Personal',
-        'Community'
-    ];
+    const categories = ['Medical', 'Education', 'Community'];
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -31,18 +28,37 @@ export default function NewCampaign() {
         e.preventDefault();
         setIsLoading(true);
 
+        const categoryMap = {
+            Medical: 1,
+            Community: 2,
+            Education: 3
+        };
+
         try {
-            // TODO: Replace with API call to create campaign
-            console.log('Creating campaign:', formInput);
+            const user = JSON.parse(localStorage.getItem("user"));
+            const userId = user?.userId || 2; // Fallback user ID for testing
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const formData = new FormData();
+            formData.append("userId", userId);
+            formData.append("title", formInput.name);
+            formData.append("categoryId", categoryMap[formInput.category]);
+            formData.append("startDate", formInput.startDate);
+            formData.append("endDate", formInput.endDate);
+            formData.append("targetAmt", formInput.target);
+            formData.append("documentFile", documentFile);
 
-            alert('Campaign created successfully!');
+            const response = await fetch("http://localhost:8080/api/campaigns", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error("Server Error");
+
+            alert("Campaign created successfully!");
             navigate('/');
         } catch (error) {
-            console.error('Error creating campaign:', error);
-            alert('Failed to create campaign. Please try again.');
+            console.error("Error creating campaign:", error);
+            alert("Failed to create campaign. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -104,14 +120,9 @@ export default function NewCampaign() {
                             type="number"
                             min={0}
                             onKeyDown={(e) => {
-                                const allowedKeys = [
-                                'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'
-                                ];
+                                const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
                                 const isNumber = /^\d$/.test(e.key);
-
-                                if (!isNumber && !allowedKeys.includes(e.key)) {
-                                e.preventDefault();
-                                }
+                                if (!isNumber && !allowedKeys.includes(e.key)) e.preventDefault();
                             }}
                             name="target"
                             value={formInput.target}
@@ -123,14 +134,37 @@ export default function NewCampaign() {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Image URL</label>
+                        <label className="form-label">Start Date</label>
                         <input
-                            type="url"
-                            name="imageURL"
-                            value={formInput.imageURL}
+                            type="date"
+                            name="startDate"
+                            value={formInput.startDate}
                             onChange={handleInput}
                             className="form-input"
-                            placeholder="Enter image URL"
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className="form-label">End Date</label>
+                        <input
+                            type="date"
+                            name="endDate"
+                            value={formInput.endDate}
+                            onChange={handleInput}
+                            className="form-input"
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className="form-label">Upload Document</label>
+                        <input
+                            type="file"
+                            name="documentFile"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            onChange={(e) => setDocumentFile(e.target.files[0])}
+                            className="form-input"
                             required
                         />
                     </div>
@@ -147,4 +181,4 @@ export default function NewCampaign() {
             </div>
         </div>
     );
-} 
+}
