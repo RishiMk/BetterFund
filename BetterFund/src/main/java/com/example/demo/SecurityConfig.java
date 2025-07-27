@@ -27,8 +27,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/auth/admin/changerole").permitAll()//This is a temporary fix to allow all to change role it should be removed later 
-                .anyRequest().authenticated())
+                .requestMatchers("/api/campaigns/**").permitAll() // ✅ allow full campaign endpoint
+                .anyRequest().authenticated()
+            )
             .authenticationProvider(authenticationProvider());
 
         return http.build();

@@ -17,8 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
-        // Your database has role names: "Admin", "Campaign Creator", "Donor"
-        // Spring Security expects ROLE_ prefix, so we need to convert
+        
         String roleName = user.getRole().getName();
         String springSecurityRole;
         
@@ -39,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
             .username(user.getEmail())
             .password(user.getPassword())
-            .roles(springSecurityRole) // This will add "ROLE_" prefix automatically
+            .roles(springSecurityRole)
             .build();
     }
 }

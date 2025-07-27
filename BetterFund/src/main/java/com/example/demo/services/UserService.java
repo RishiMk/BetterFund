@@ -30,8 +30,7 @@ public class UserService {
         user.setAdharNo(adharNo);
         user.setPhoneNo(phoneNo);
 
-        // Based on your database: role_id 2 = "Campaign Creator", role_id 3 = "Donor"
-        // Let's default new users to "Donor" role (role_id = 3)
+        // default new users to "Donor" role (role_id = 3)
         Role userRole = roleRepository.findById(3).orElseThrow(() -> 
             new RuntimeException("Default user role not found"));
         user.setRole(userRole);
@@ -40,13 +39,11 @@ public class UserService {
         return true;
     }
 
-    // Overloaded method for backward compatibility
-    public boolean register(String name, String email, String rawPassword) {
-        // Generate dummy values for required fields - NOT RECOMMENDED for production
-        String dummyAdhar = generateDummyAdhar();
-        String dummyPhone = generateDummyPhone();
-        return register(name, email, rawPassword, dummyAdhar, dummyPhone);
-    }
+//    public boolean register(String name, String email, String rawPassword) {
+//        String dummyAdhar = generateDummyAdhar();
+//        String dummyPhone = generateDummyPhone();
+//        return register(name, email, rawPassword, dummyAdhar, dummyPhone);
+//    }
 
     public boolean login(String email, String rawPassword) {
         return userRepository.findByEmail(email)
@@ -72,7 +69,6 @@ public class UserService {
     	u.setAdharNo(adharNo);
     	u.setPhoneNo(phoneNo);
 
-    	// assign default role (make sure this is NOT admin!)
     	Role userRole = roleRepository.findByName("Donor").orElseThrow(() -> new RuntimeException("Default role Donor not found"));
     	u.setRole(userRole);
 
@@ -91,12 +87,11 @@ public class UserService {
         return true;
     }
 
-    // Helper methods to generate dummy data - NOT RECOMMENDED for production
-    private String generateDummyAdhar() {
-        return String.valueOf(System.currentTimeMillis()).substring(0, 12);
-    }
-
-    private String generateDummyPhone() {
-        return String.valueOf(System.currentTimeMillis() % 10000000000L);
-    }
+//    private String generateDummyAdhar() {
+//        return String.valueOf(System.currentTimeMillis()).substring(0, 12);
+//    }
+//
+//    private String generateDummyPhone() {
+//        return String.valueOf(System.currentTimeMillis() % 10000000000L);
+//    }
 }

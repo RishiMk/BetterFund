@@ -16,7 +16,7 @@ public class Role {
     private Integer id;
 
     @Column(nullable = false, unique = true, name="rname")
-    private String name; // e.g. "ROLE_ADMIN", "ROLE_USER"
+    private String name;
 
 	public Integer getId() {
 		return id;

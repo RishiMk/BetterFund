@@ -24,7 +24,7 @@ public class AuthController {
         String adharNo  = body.get("adharNo");
         String phoneNo  = body.get("phoneNo");
 
-        // --- validation ---
+        
         if (username == null || email == null || password == null ||
             adharNo == null  || phoneNo == null) {
             return ResponseEntity.badRequest()
@@ -43,10 +43,10 @@ public class AuthController {
         if (user == null) {
             return ResponseEntity.badRequest()
                     .body(Map.of("success", false,
-                                 "message", "Registration failed – Account already exists. Please Login"));
+                                 "message", "Registration failed – email/adhar/phone already exists"));
         }
 
-        // success JSON
+
         return ResponseEntity.ok(Map.of(
                 "success", true,
                 "message", "User registered successfully",
