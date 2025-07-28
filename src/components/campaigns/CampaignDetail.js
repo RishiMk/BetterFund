@@ -20,7 +20,7 @@ export default function CampaignDetail() {
         setLoading(true);
         setError('');
         try {
-            const res = await fetch(`http://localhost:8081/api/campaigns/${id}`);
+            const res = await fetch(`http://localhost:8081/api/campaign/${id}`);
             if (!res.ok) throw new Error('Campaign not found');
             const data = await res.json();
 

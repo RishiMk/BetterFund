@@ -92,7 +92,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/campaigns/active")
+    fetch("http://localhost:8081/api/campaign/active")
       .then(res => res.json())
       .then(data => {
         let formatted = [];
