@@ -2,6 +2,9 @@ package com.example.demo.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +16,7 @@ public class Wallet {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     private Float amount;
@@ -20,7 +24,9 @@ public class Wallet {
     private LocalDate creationDate;
 
     @OneToOne(mappedBy = "wallet")
+    @JsonBackReference
     private Campaign campaign;
+
 
 	public Wallet() {
 		super();

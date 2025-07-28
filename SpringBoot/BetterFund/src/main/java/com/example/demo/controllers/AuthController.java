@@ -1,10 +1,13 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.User;
+import com.example.demo.services.CustomUserDetailsService;
+import com.example.demo.services.UserService;
+import com.example.demo.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.services.UserService;
 
 import java.util.Map;
 
@@ -16,6 +19,13 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
+    // ✅ REGISTER ENDPOINT
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
         String username = body.get("username");
@@ -24,16 +34,16 @@ public class AuthController {
         String adharNo  = body.get("adharNo");
         String phoneNo  = body.get("phoneNo");
 
-        
-        if (username == null || email == null || password == null ||
-            adharNo == null  || phoneNo == null) {
+        if (username == null || email == null || password == null || adharNo == null || phoneNo == null) {
             return ResponseEntity.badRequest()
                     .body(Map.of("success", false, "message", "All fields are required"));
         }
+
         if (!adharNo.matches("\\d{12}")) {
             return ResponseEntity.badRequest()
                     .body(Map.of("success", false, "message", "Adhar must be 12 digits"));
         }
+
         if (!phoneNo.matches("\\d{10}")) {
             return ResponseEntity.badRequest()
                     .body(Map.of("success", false, "message", "Phone must be 10 digits"));
@@ -45,7 +55,6 @@ public class AuthController {
                     .body(Map.of("success", false,
                                  "message", "Registration failed – email/adhar/phone already exists"));
         }
-
 
         return ResponseEntity.ok(Map.of(
                 "success", true,
@@ -60,6 +69,7 @@ public class AuthController {
         ));
     }
 
+    // ✅ LOGIN ENDPOINT
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
         String email = loginData.get("email");
@@ -67,9 +77,14 @@ public class AuthController {
 
         User user = userService.loginAndGetUser(email, password);
         if (user != null) {
+            // Load UserDetails and generate JWT
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
+            String token = jwtUtil.generateToken(userDetails);
+
             return ResponseEntity.ok(Map.of(
                     "success", true,
                     "message", "Logged in successfully",
+                    "token", token,
                     "user", Map.of(
                             "id", user.getId(),
                             "email", user.getEmail(),
@@ -84,6 +99,7 @@ public class AuthController {
         }
     }
 
+    // ✅ ROLE CHANGE ENDPOINT (ADMIN ONLY)
     @PostMapping("/admin/changerole")
     public ResponseEntity<?> changeRole(@RequestParam String targetEmail,
                                         @RequestParam Integer newRoleId) {

@@ -4,7 +4,10 @@ import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -17,28 +20,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
-        
         String roleName = user.getRole().getName();
-        String springSecurityRole;
-        
-        switch (roleName) {
-            case "Admin":
-                springSecurityRole = "ADMIN";
-                break;
-            case "Campaign Creator":
-                springSecurityRole = "CREATOR";
-                break;
-            case "Donor":
-                springSecurityRole = "DONOR";
-                break;
-            default:
-                springSecurityRole = "USER";
-        }
 
-        return org.springframework.security.core.userdetails.User.builder()
-            .username(user.getEmail())
-            .password(user.getPassword())
-            .roles(springSecurityRole)
-            .build();
+        return new org.springframework.security.core.userdetails.User(
+            user.getEmail(),
+            user.getPassword(),
+            Collections.singletonList(new SimpleGrantedAuthority(roleName))
+        );
     }
 }

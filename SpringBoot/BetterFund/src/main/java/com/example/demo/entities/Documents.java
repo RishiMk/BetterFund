@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class Documents {
     private byte[] documents;
 
     @OneToOne(mappedBy = "document")
+    @JsonIgnore
     private Campaign campaign;
 
 	public Documents() {

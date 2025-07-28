@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Campaign {
 
@@ -13,6 +16,7 @@ public class Campaign {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     private String title;
@@ -24,15 +28,19 @@ public class Campaign {
     private LocalDate startDate;
     private LocalDate endDate;
     private Float targetAmt;
-    private String status = "active";
+    private String status = "pending";
 
     @OneToOne
     @JoinColumn(name = "wallet_id")
+    @JsonManagedReference
     private Wallet wallet;
+
 
     @OneToOne
     @JoinColumn(name = "document_id")
     private Documents document;
+    
+    
 
 	public Campaign() {
 		super();
