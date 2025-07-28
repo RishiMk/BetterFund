@@ -47,7 +47,7 @@ export default function NewCampaign() {
             formData.append("targetAmt", formInput.target);
             formData.append("documentFile", documentFile);
 
-            const response = await fetch("http://localhost:8080/api/campaigns", {
+            const response = await fetch("http://localhost:8081/api/campaigns", {
                 method: "POST",
                 body: formData,
             });

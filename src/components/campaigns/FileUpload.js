@@ -22,7 +22,7 @@ const MultiFileUpload = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/files/multi-upload",
+        "http://localhost:8081/api/files/multi-upload",
         formData,
         {
           headers: {

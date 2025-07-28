@@ -1,65 +1,51 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthAPI } from './auth'; // Import AuthAPI
+import { AuthAPI } from './auth';
 
 export default function Login() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setError('');
-        console.log('Login form submitted'); // Debug log
+        console.log('🔐 Login form submitted');
 
         try {
-            // Use AuthAPI for login
             const responseData = await AuthAPI.login(formData.email, formData.password);
-            console.log('Login API response:', responseData); // Debug log
+            console.log('✅ Login API response:', responseData);
 
             if (responseData.success) {
                 const user = responseData.user;
+                const token = responseData.token;
 
+                // ✅ Store token and user info
+                localStorage.setItem('token', token);
                 localStorage.setItem('userLoggedIn', 'true');
                 localStorage.setItem('userEmail', user.email);
                 localStorage.setItem('userName', user.username);
                 localStorage.setItem('userRole', user.role);
                 localStorage.setItem('userId', user.id.toString());
-
-                if (user.isAdmin) {
-                    localStorage.setItem('adminLoggedIn', 'true');
-                    localStorage.setItem('userType', 'admin');
-                } else {
-                    localStorage.setItem('adminLoggedIn', 'false');
-                    localStorage.setItem('userType', 'user');
-                }
+                localStorage.setItem('adminLoggedIn', user.isAdmin ? 'true' : 'false');
+                localStorage.setItem('userType', user.isAdmin ? 'admin' : 'user');
 
                 window.dispatchEvent(new Event('loginStatusChanged'));
-                alert('Login successful');
+                alert('✅ Login successful!');
 
-                if (user.isAdmin) {
-                    navigate('/admin/dashboard');
-                } else {
-                    navigate('/');
-                }
+                navigate(user.isAdmin ? '/admin/dashboard' : '/');
             } else {
                 setError(responseData.message || 'Login failed. Please try again.');
             }
         } catch (error) {
-            console.error('Login error:', error);
+            console.error('❌ Login error:', error);
             setError('Network error. Please check your connection and try again.');
         } finally {
             setIsLoading(false);
@@ -72,11 +58,7 @@ export default function Login() {
                 <h1>Login</h1>
                 <p>Sign in to access your BetterFund account or admin panel.</p>
 
-                {error && (
-                    <div className="alert alert-error">
-                        {error}
-                    </div>
-                )}
+                {error && <div className="alert alert-error">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -121,7 +103,7 @@ export default function Login() {
                         <p><strong>Email:</strong> admin@betterfund.com</p>
                         <p><strong>Password:</strong> admin123</p>
                         <hr style={{ margin: '7px 0' }} />
-                        <h4>Example user Access:</h4>
+                        <h4>Example User Access:</h4>
                         <p><strong>Email:</strong> test@example.com</p>
                         <p><strong>Password:</strong> password123</p>
                     </div>
