@@ -27,10 +27,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/campaigns/**").permitAll() // ✅ allow full campaign endpoint
-                .anyRequest().anonymous()
-            );
-//            .authenticationProvider(authenticationProvider());
+                .requestMatchers("/api/campaigns/**").permitAll()
+                .anyRequest().authenticated())
+            .authenticationProvider(authenticationProvider());
 
         return http.build();
     }
