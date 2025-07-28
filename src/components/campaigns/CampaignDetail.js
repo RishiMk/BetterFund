@@ -13,86 +13,48 @@ export default function CampaignDetail() {
 
     useEffect(() => {
         loadCampaign();
+        // eslint-disable-next-line
     }, [id]);
 
-    const loadCampaign = () => {
-        // load campaign data from localStorage
-        const campaigns = JSON.parse(localStorage.getItem('campaigns') || '[]');
+    const loadCampaign = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const res = await fetch(`http://localhost:8081/api/campaigns/${id}`);
+            if (!res.ok) throw new Error('Campaign not found');
+            const data = await res.json();
 
-        // also check sample campaigns if not found in localStorage
-        const sampleCampaigns = [
-            {
-                id: 0,
-                name: "Help My Father's Heart Surgery",
-                description: "My father needs an urgent heart surgery. We've exhausted all our savings and need your support to save his life. Every contribution matters and will help us cover the surgery costs, hospital stay, and post-operative care.",
-                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
-                target: 500000,
-                raised: 25000,
-                contributors: 12,
-                daysLeft: 30,
-                category: "Medical",
-                creatorId: "Rahul Sharma",
-                status: "active",
-                requestsCount: 0,
-                createdAt: "2024-01-25"
-            },
-            {
-                id: 1,
-                name: "My Daughter's Education Fund",
-                description: "My daughter got admission to a prestigious engineering college but we can't afford the fees. Please help her achieve her dreams. The funds will cover tuition fees, books, and accommodation for the first year.",
-                image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&h=300&q=80",
-                target: 200000,
-                raised: 15000,
-                contributors: 8,
-                daysLeft: 45,
-                category: "Education",
-                creatorId: "Priya Patel",
-                status: "active",
-                requestsCount: 0,
-                createdAt: "2024-01-22"
-            },
-            {
-                id: 2,
-                name: "Start My Small Business",
-                description: "I want to start a small tailoring business to support my family. I have the skills but need funds for equipment and initial setup. This will help me become self-employed and provide for my children.",
-                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
-                target: 80000,
-                raised: 12000,
-                contributors: 23,
-                daysLeft: 20,
-                category: "Personal",
-                creatorId: "Meera Singh",
-                status: "active",
-                requestsCount: 0,
-                createdAt: "2024-01-28"
-            },
-            {
-                id: 3,
-                name: "Community Library for Our Village",
-                description: "We want to build a small library in our village so children can study and access books. This will help improve education in our area and provide a safe space for learning.",
-                image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop",
-                target: 80000,
-                raised: 30000,
-                contributors: 45,
-                daysLeft: 15,
-                category: "Community",
-                creatorId: "Local Youth Group",
-                status: "active",
-                requestsCount: 2,
-                createdAt: "2024-01-15"
+            // Calculate days left from startDate and endDate
+            let daysLeft = 0;
+            if (data.endDate) {
+                const end = new Date(data.endDate);
+                const today = new Date();
+                // Set time to midnight for accurate day difference
+                end.setHours(0,0,0,0);
+                today.setHours(0,0,0,0);
+                daysLeft = Math.max(0, Math.ceil((end - today) / (1000 * 60 * 60 * 24)));
             }
-        ];
 
-        // Ensure id is always compared as a number
-        const campaignId = Number(id);
-        const foundCampaign = campaigns.find(c => Number(c.id) === campaignId) || sampleCampaigns.find(c => Number(c.id) === campaignId);
+            // Map backend data to UI structure
+            const mappedCampaign = {
+                id: data.campaignId,
+                name: data.title,
+                description: data.description || "No description provided.",
+                // image: "/placeholder.jpg", // Replace with data.image if available
+                target: data.targetAmt,
+                raised: data.wallet?.amount || 0,
+                daysLeft: daysLeft,
+                category: data.category?.cname || "Uncategorized",
+                creatorId: data.user?.username || "Unknown",
+                status: data.status,
+                createdAt: data.startDate
+            };
 
-        if (foundCampaign) {
-            setCampaign(foundCampaign);
-        } else {
-            setError('Campaign not found');
+            setCampaign(mappedCampaign);
+        } catch (err) {
+            setError(err.message);
+            setCampaign(null);
         }
-
         setLoading(false);
     };
 
@@ -103,41 +65,18 @@ export default function CampaignDetail() {
         setSuccess('');
 
         try {
-            // basic validation
             if (!contributionAmount || contributionAmount <= 0) {
                 throw new Error('Please enter a valid amount');
             }
-
-            // check if user is logged in
             const isLoggedIn = localStorage.getItem('userLoggedIn');
             if (!isLoggedIn) {
                 throw new Error('Please login to contribute');
             }
-
-            // update campaign data
-            const updatedCampaign = {
-                ...campaign,
-                raised: campaign.raised + parseFloat(contributionAmount),
-                contributors: campaign.contributors + 1
-            };
-
-            // save updated campaign
-            const campaigns = JSON.parse(localStorage.getItem('campaigns') || '[]');
-            const updatedCampaigns = campaigns.map(c =>
-                c.id == id ? updatedCampaign : c
-            );
-            localStorage.setItem('campaigns', JSON.stringify(updatedCampaigns));
-
-            setCampaign(updatedCampaign);
+            // Here you would POST to your backend to record the contribution
             setSuccess(`Thank you for your contribution of ₹${contributionAmount}!`);
             setContributionAmount('');
             setShowContributionForm(false);
-
-            // hide success message after 3 seconds
-            setTimeout(() => {
-                setSuccess('');
-            }, 3000);
-
+            setTimeout(() => setSuccess(''), 3000);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -163,7 +102,8 @@ export default function CampaignDetail() {
             'Medical': '#e53e3e',
             'Education': '#3182ce',
             'Personal': '#805ad5',
-            'Community': '#38a169'
+            'Community': '#38a169',
+            'Natural Disaster': '#d69e2e'
         };
         return colors[category] || '#718096';
     };
@@ -226,10 +166,6 @@ export default function CampaignDetail() {
                         <div className="stat-card">
                             <h3>Target</h3>
                             <p className="stat-value">{formatCurrency(campaign.target)}</p>
-                        </div>
-                        <div className="stat-card">
-                            <h3>Contributors</h3>
-                            <p className="stat-value">{campaign.contributors}</p>
                         </div>
                         <div className="stat-card">
                             <h3>Days Left</h3>
@@ -300,9 +236,6 @@ export default function CampaignDetail() {
                             >
                                 Contribute Now
                             </button>
-                            <Link to={`/campaign/${id}/requests`} className="btn btn-secondary">
-                                View Requests ({campaign.requestsCount})
-                            </Link>
                         </div>
                     )}
 
@@ -334,4 +267,4 @@ export default function CampaignDetail() {
             )}
         </div>
     );
-} 
+}
