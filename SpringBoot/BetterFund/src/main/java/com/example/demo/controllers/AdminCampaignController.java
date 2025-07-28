@@ -9,7 +9,6 @@ import com.example.demo.entities.Campaign;
 import com.example.demo.repositories.CampaignRepository;
 
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")

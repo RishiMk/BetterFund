@@ -10,11 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/campaign")
 public class CampaignController {
 
     @Autowired
@@ -34,9 +35,80 @@ public class CampaignController {
 
     @Autowired
     private RoleRepository roleRepo;
+    
+    
+    @GetMapping("/active")
+    public List<Map<String, Object>> getAllActiveCampaigns() {
+        List<Campaign> campaigns = campaignRepo.findByStatus("active");
 
+        return campaigns.stream().map(campaign -> {
+            Map<String, Object> response = new HashMap<>();
+
+            response.put("campaignId", campaign.getCampaignId());
+            response.put("title", campaign.getTitle());
+            response.put("startDate", campaign.getStartDate());
+            response.put("endDate", campaign.getEndDate());
+            response.put("targetAmt", campaign.getTargetAmt());
+            response.put("status", campaign.getStatus());
+
+            // Minimal User Info
+            Map<String, Object> userMap = new HashMap<>();
+            userMap.put("username", campaign.getUser().getUsername());
+            response.put("user", userMap);
+
+            // Minimal Category Info
+            Map<String, Object> categoryMap = new HashMap<>();
+            categoryMap.put("categoryId", campaign.getCategory().getCategoryId());
+            categoryMap.put("cname", campaign.getCategory().getCname());
+            response.put("category", categoryMap);
+            
+            Map<String, Object> walletMap = new HashMap<>();
+            walletMap.put("amount", campaign.getWallet().getAmount());
+            response.put("wallet", walletMap);
+
+            return response;
+        }).collect(Collectors.toList());
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> getCampaignById(@PathVariable Integer id) {
+        Optional<Campaign> optionalCampaign = campaignRepo.findById(id);
+
+        if (optionalCampaign.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Campaign campaign = optionalCampaign.get();
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("campaignId", campaign.getCampaignId());
+        response.put("title", campaign.getTitle());
+        response.put("startDate", campaign.getStartDate());
+        response.put("endDate", campaign.getEndDate());
+        response.put("targetAmt", campaign.getTargetAmt());
+        response.put("status", campaign.getStatus());
+
+        // Minimal User Info
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("username", campaign.getUser().getUsername());
+        response.put("user", userMap);
+
+        // Minimal Category Info
+        Map<String, Object> categoryMap = new HashMap<>();
+        categoryMap.put("categoryId", campaign.getCategory().getCategoryId());
+        categoryMap.put("cname", campaign.getCategory().getCname());
+        response.put("category", categoryMap);
+
+        // Wallet Info
+        Map<String, Object> walletMap = new HashMap<>();
+        walletMap.put("amount", campaign.getWallet().getAmount());
+        response.put("wallet", walletMap);
+
+        return ResponseEntity.ok(response);
+    }
+    
     // CREATE CAMPAIGN
-    @PostMapping("/campaigns")
+    @PostMapping("/create")
     public ResponseEntity<?> createCampaign(
             @RequestParam Integer userId,
             @RequestParam String title,
