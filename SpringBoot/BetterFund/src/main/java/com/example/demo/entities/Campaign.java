@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 public class Campaign {
 
@@ -35,7 +32,6 @@ public class Campaign {
 
     @OneToOne
     @JoinColumn(name = "document_id")
-    @JsonIgnore
     private Documents document;
 
 	public Campaign() {
