@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,19 +23,24 @@ public class User {
     private String username;
     
     @Column(nullable = false, unique = true)
+    @JsonIgnore
     private String email;
     
     @Column(nullable = false, name="password")
+    @JsonIgnore
     private String password;
     
     @Column(name="adhar_no", nullable = false, unique = true, length = 12)
+    @JsonIgnore
     private String adharNo;
     
     @Column(name="phone_no", nullable = false, unique = true, length = 10)
+    @JsonIgnore
     private String phoneNo;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
+    @JsonIgnore
     private Role role;
 
     public User() {

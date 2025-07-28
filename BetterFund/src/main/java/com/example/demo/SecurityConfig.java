@@ -28,9 +28,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/campaigns/**").permitAll() // ✅ allow full campaign endpoint
-                .anyRequest().authenticated()
-            )
-            .authenticationProvider(authenticationProvider());
+                .anyRequest().anonymous()
+            );
+//            .authenticationProvider(authenticationProvider());
 
         return http.build();
     }
