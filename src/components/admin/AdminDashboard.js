@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import DocumentViewer from '../ui/DocumentViewer';
+import ChangeRole from './ChangeRole';
 import axios from 'axios';
 
 export default function AdminDashboard() {
@@ -32,7 +33,7 @@ export default function AdminDashboard() {
             return;
         }
 
-        axios.get('http://localhost:8081/api/admin/pending-campaigns', {
+        axios.get('http://localhost:8081/api/campaign/admin/pending-campaigns', {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => {
@@ -126,6 +127,7 @@ const handleRejectCampaign = (verificationNotes) => {
         console.error("❌ Rejection error:", err.response?.data || err.message);
         alert("Failed to reject campaign.");
     });
+
 };
 
     return (
@@ -172,6 +174,12 @@ const handleRejectCampaign = (verificationNotes) => {
                 ) : (
                     <p>No pending campaign approvals.</p>
                 )}
+
+                <br/><br/><br/>
+                <div>
+                    <ChangeRole/>
+                </div>
+
             </div>
 
             {/* Document Modal */}
