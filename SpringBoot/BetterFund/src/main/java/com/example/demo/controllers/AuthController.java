@@ -6,9 +6,11 @@ import com.example.demo.services.UserService;
 import com.example.demo.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -99,7 +101,14 @@ public class AuthController {
         }
     }
 
-    // ✅ ROLE CHANGE ENDPOINT (ADMIN ONLY)
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/users")
+    public ResponseEntity<?> getAllUsers() {
+        List<User> users = userService.getAllUsers();  // fetch from service
+        return ResponseEntity.ok(users);
+    }
+    
+    // ROLE CHANGE ENDPOINT (ADMIN ONLY)
     @PostMapping("/admin/changerole")
     public ResponseEntity<?> changeRole(@RequestParam String targetEmail,
                                         @RequestParam Integer newRoleId) {
