@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.repositories.RoleRepository;
 import com.example.demo.repositories.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -73,6 +74,10 @@ public class UserService {
     	u.setRole(userRole);
 
     	return userRepository.save(u);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public boolean changeRole(String targetEmail, Integer newRoleId) {

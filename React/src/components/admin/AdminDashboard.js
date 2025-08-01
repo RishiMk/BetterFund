@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import DocumentViewer from '../ui/DocumentViewer';
+import ChangeRole from './ChangeRole';
 import axios from 'axios';
 
 export default function AdminDashboard() {
@@ -35,23 +36,23 @@ export default function AdminDashboard() {
         axios.get('http://localhost:8081/api/campaign/admin/pending-campaigns', {
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then(res => {
-                const campaignsArray = Array.isArray(res.data) ? res.data : [];
-                setPendingCampaigns(campaignsArray);
-                setStats(prev => ({
-                    ...prev,
-                    totalCampaigns: campaignsArray.length,
-                    pendingApprovals: campaignsArray.length
-                }));
-            })
-            .catch(err => {
-                console.error("❌ Error fetching pending campaigns:", err);
-                if (err.response?.status === 401 || err.response?.status === 403) {
-                    alert("Session expired or unauthorized. Please log in again.");
-                    localStorage.clear();
-                    navigate('/login');
-                }
-            });
+        .then(res => {
+            const campaignsArray = Array.isArray(res.data) ? res.data : [];
+            setPendingCampaigns(campaignsArray);
+            setStats(prev => ({
+                ...prev,
+                totalCampaigns: campaignsArray.length,
+                pendingApprovals: campaignsArray.length
+            }));
+        })
+        .catch(err => {
+            console.error("❌ Error fetching pending campaigns:", err);
+            if (err.response?.status === 401 || err.response?.status === 403) {
+                alert("Session expired or unauthorized. Please log in again.");
+                localStorage.clear();
+                navigate('/login');
+            }
+        });
     };
 
     const handleLogout = () => {
@@ -81,52 +82,53 @@ export default function AdminDashboard() {
     };
 
     const handleApproveCampaign = (verificationNotes) => {
-        const token = localStorage.getItem('token');
-        if (!token || !selectedCampaign) return;
+    const token = localStorage.getItem('token');
+    if (!token || !selectedCampaign) return;
 
-        axios.put(`http://localhost:8081/api/admin/campaigns/${selectedCampaign.campaignId}/approve`,
-            { notes: verificationNotes },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+    axios.put(`http://localhost:8081/api/admin/campaigns/${selectedCampaign.campaignId}/approve`,
+        { notes: verificationNotes },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
-        )
-            .then(res => {
-                alert(`✅ Campaign "${selectedCampaign.title}" approved.`);
-                setPendingCampaigns(prev => prev.filter(c => c.campaignId !== selectedCampaign.campaignId));
-                handleCloseDocumentViewer();
-            })
-            .catch(err => {
-                console.error("❌ Approval error:", err.response?.data || err.message);
-                alert("Failed to approve campaign.");
-            });
-    };
+        }
+    )
+    .then(res => {
+        alert(`✅ Campaign "${selectedCampaign.title}" approved.`);
+        setPendingCampaigns(prev => prev.filter(c => c.campaignId !== selectedCampaign.campaignId));
+        handleCloseDocumentViewer();
+    })
+    .catch(err => {
+        console.error("❌ Approval error:", err.response?.data || err.message);
+        alert("Failed to approve campaign.");
+    });
+};
 
-    const handleRejectCampaign = (verificationNotes) => {
-        const token = localStorage.getItem('token');
-        if (!token || !selectedCampaign) return;
+const handleRejectCampaign = (verificationNotes) => {
+    const token = localStorage.getItem('token');
+    if (!token || !selectedCampaign) return;
 
-        axios.put(`http://localhost:8081/api/admin/campaigns/${selectedCampaign.campaignId}/reject`,
-            { notes: verificationNotes },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+    axios.put(`http://localhost:8081/api/admin/campaigns/${selectedCampaign.campaignId}/reject`,
+        { notes: verificationNotes },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
-        )
-            .then(res => {
-                alert(`❌ Campaign "${selectedCampaign.title}" rejected.`);
-                setPendingCampaigns(prev => prev.filter(c => c.campaignId !== selectedCampaign.campaignId));
-                handleCloseDocumentViewer();
-            })
-            .catch(err => {
-                console.error("❌ Rejection error:", err.response?.data || err.message);
-                alert("Failed to reject campaign.");
-            });
-    };
+        }
+    )
+    .then(res => {
+        alert(`❌ Campaign "${selectedCampaign.title}" rejected.`);
+        setPendingCampaigns(prev => prev.filter(c => c.campaignId !== selectedCampaign.campaignId));
+        handleCloseDocumentViewer();
+    })
+    .catch(err => {
+        console.error("❌ Rejection error:", err.response?.data || err.message);
+        alert("Failed to reject campaign.");
+    });
+
+};
 
     return (
         <div className="container">
@@ -172,6 +174,12 @@ export default function AdminDashboard() {
                 ) : (
                     <p>No pending campaign approvals.</p>
                 )}
+
+                <br/><br/><br/>
+                <div>
+                    <ChangeRole/>
+                </div>
+
             </div>
 
             {/* Document Modal */}
