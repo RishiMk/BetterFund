@@ -1,0 +1,82 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        # 🔐 Authentication Service
+        - id: AuthenticationService
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**
+
+        # 📣 Campaign Service
+        - id: campaign-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/campaign/**
+
+        # ✅ Admin Campaign Approval
+        - id: approve-campaign
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/admin/campaigns/{id}/approve
+          filters:
+            - RewritePath=/api/admin/campaigns/(?<id>.*)/approve, /campaigns/${id}/approve
+
+        # ❌ Admin Campaign Rejection
+        - id: reject-campaign
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/admin/campaigns/{id}/reject
+          filters:
+            - RewritePath=/api/admin/campaigns/(?<id>.*)/reject, /campaigns/${id}/reject
+
+        # 🏆 Success Story Service
+        - id: success-story-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/successstories/**
+          filters:
+            - RewritePath=/api/successstories(?<segment>/?.*), /api/successstories${segment}
+
+        # 💬 Comments Service (handled by .NET)
+        - id: comments-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/comments/**
+          filters:
+            - RewritePath=/api/comments(?<segment>/?.*), /api/comments${segment}
+
+        # 📝 Feedback Service (handled by .NET)
+        - id: feedback-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/feedback/**
+          filters:
+            - RewritePath=/api/feedback(?<segment>/?.*), /api/feedback${segment}
+
+        # 💸 Donation Service (.NET DonateController)
+        - id: donate-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/donate/**
+          filters:
+            - RewritePath=/api/donate(?<segment>/?.*), /api/donate${segment}
+
+        # 👤 User Profile & Contributions (.NET UserController)
+        - id: user-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - RewritePath=/api/user(?<segment>/?.*), /api/user${segment}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

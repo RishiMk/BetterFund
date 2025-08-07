@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DonateAndUser_Service.props" />
+</Project>

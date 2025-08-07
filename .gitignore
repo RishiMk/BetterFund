@@ -5,10 +5,10 @@
 /.pnp
 .pnp.js
 /.metadata/
-SpringBoot/
-React/
-DotNet/
-Database/
+/SpringBoot/
+/React/
+/DotNet/
+/Database/
 
 # testing
 /coverage
