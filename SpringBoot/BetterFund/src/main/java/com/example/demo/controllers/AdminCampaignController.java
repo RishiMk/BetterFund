@@ -17,6 +17,7 @@ public class AdminCampaignController {
     @Autowired
     private CampaignRepository campaignRepository;
 
+///////////////////// APROVE CAMPAGIN //////////////////////////
     @PutMapping("/campaigns/{id}/approve")
     public ResponseEntity<?> approveCampaign(@PathVariable Long id, @RequestBody Map<String, String> body) {
         Campaign campaign = campaignRepository.findById(id.intValue()).orElse(null);
@@ -27,7 +28,9 @@ public class AdminCampaignController {
         campaignRepository.save(campaign);
         return ResponseEntity.ok("Campaign approved.");
     }
+////////////// END OF APPROVE CAMPAGIN  ////////////////////
 
+////////////// REJECT OF CAMPAGIN  ////////////////////
     @PutMapping("/campaigns/{id}/reject")
     public ResponseEntity<?> rejectCampaign(@PathVariable Long id, @RequestBody Map<String, String> body) {
         Campaign campaign = campaignRepository.findById(id.intValue()).orElse(null);
@@ -38,5 +41,6 @@ public class AdminCampaignController {
         campaignRepository.save(campaign);
         return ResponseEntity.ok("Campaign rejected.");
     }
+////////////// END OF REJECT OF CAMPAGIN  ////////////////////
 
 }

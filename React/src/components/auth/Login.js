@@ -17,18 +17,19 @@ export default function Login() {
         e.preventDefault();
         setIsLoading(true);
         setError('');
-        console.log('🔐 Login form submitted');
+        console.log(' Login form submitted');
 
         try {
             const responseData = await AuthAPI.login(formData.email, formData.password);
-            console.log('✅ Login API response:', responseData);
+            console.log(' Login API response:', responseData);
 
             if (responseData.success) {
                 const user = responseData.user;
                 const token = responseData.token;
 
-                // ✅ Store token and user info
+                // Store token and user info
                 localStorage.setItem('token', token);
+                
                 localStorage.setItem('userLoggedIn', 'true');
                 localStorage.setItem('userEmail', user.email);
                 localStorage.setItem('userName', user.username);
@@ -36,16 +37,17 @@ export default function Login() {
                 localStorage.setItem('userId', user.id.toString());
                 localStorage.setItem('adminLoggedIn', user.isAdmin ? 'true' : 'false');
                 localStorage.setItem('userType', user.isAdmin ? 'admin' : 'user');
+          
 
                 window.dispatchEvent(new Event('loginStatusChanged'));
-                alert('✅ Login successful!');
+                alert(' Login successful!');
 
                 navigate(user.isAdmin ? '/admin/dashboard' : '/');
             } else {
                 setError(responseData.message || 'Login failed. Please try again.');
             }
         } catch (error) {
-            console.error('❌ Login error:', error);
+            console.error(' Login error:', error);
             setError('Network error. Please check your connection and try again.');
         } finally {
             setIsLoading(false);
@@ -54,9 +56,17 @@ export default function Login() {
 
     return (
         <div className="container">
+            
             <div className="form-container">
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
+  <img src='/BetterFundLogo.png' alt="Website Logo" width="70" height="70" />
+  <h5>BetterFund</h5>
+</div>
+
+
                 <h1>Login</h1>
-                <p>Sign in to access your BetterFund account or admin panel.</p>
+                <br/>
+                {/* <p>Sign in to access your BetterFund account or admin panel.</p> */}
 
                 {error && <div className="alert alert-error">{error}</div>}
 
@@ -90,29 +100,18 @@ export default function Login() {
                     </div>
 
                     <div className="form-group">
-                        <button type="submit" className="btn" disabled={isLoading}>
+                        <button type="submit" className="btn"  disabled={isLoading}>
                             {isLoading ? 'Logging in...' : 'Login'}
                         </button>
                     </div>
                 </form>
 
-                <div className="demo-credentials">
-                    <h3>Demo Credentials:</h3>
-                    <div style={{ marginBottom: '1rem' }}>
-                        <h4>Example Admin Access:</h4>
-                        <p><strong>Email:</strong> admin@betterfund.com</p>
-                        <p><strong>Password:</strong> admin123</p>
-                        <hr style={{ margin: '7px 0' }} />
-                        <h4>Example User Access:</h4>
-                        <p><strong>Email:</strong> test@example.com</p>
-                        <p><strong>Password:</strong> password123</p>
-                    </div>
-                </div>
-
+             
                 <div style={{ textAlign: 'center', marginTop: '2rem' }}>
                     <p>Don't have an account? <Link to="/register" style={{ color: '#2c7a7b', textDecoration: 'none' }}>Sign Up</Link></p>
                 </div>
             </div>
+                
         </div>
     );
 }

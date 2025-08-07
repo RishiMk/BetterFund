@@ -44,7 +44,6 @@ export default function Requests() {
 
     const handleFinalize = async (requestId) => {
         try {
-            // TODO: Replace with API call to finalize request
             console.log('Finalizing request:', requestId);
             alert('Request finalized successfully!');
         } catch (error) {

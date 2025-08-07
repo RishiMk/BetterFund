@@ -16,16 +16,6 @@ export default function ChangeRole() {
       });
   }, []);
 
-  // const handleChangeRole = (userId) => {
-  //   const updatedUsers = users.map(user => {
-  //     if (user.user_id === userId) {
-  //       return {  ...user, role: { ...user.role, id: 2 } };
-  //     }
-  //     return user;
-  //   });
-  //   setUsers(updatedUsers);
-  // };
-
   const handleChangeRole = (userId, newRoleId) => {
     axios.post(`http://localhost:8081/api/auth/admin/changerole`, null, {
       params: {
@@ -50,7 +40,6 @@ export default function ChangeRole() {
 
   return (
     <div className="admin-page">
-      <h2>User Request Management</h2><br/>
       <table className="user-table">
         <thead>
           <tr>
@@ -104,17 +93,3 @@ export default function ChangeRole() {
     </div>
   );
 }
-
-
-// <td>{user.id}</td>
-//               <td>{user.email}</td>
-//               <td>{user.role?.id}</td>
-//               <td>
-//                 {user.role?.id !== 2 ? (
-//                   <button className="promote-btn" onClick={() => handleChangeRole(user.id )}>
-//                     Make Campaign Creator
-//                   </button>
-//                 ) : (
-//                   <span className="no-action"></span>
-//                 )}
-//               </td>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewCampaign() {
@@ -35,12 +35,12 @@ export default function NewCampaign() {
         };
 
         try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            const userId = user?.userId || 2; // Fallback user ID for testing
+            const userId = localStorage.getItem("userId");
 
             const formData = new FormData();
             formData.append("userId", userId);
             formData.append("title", formInput.name);
+            formData.append("description", formInput.description); // ✅ added
             formData.append("categoryId", categoryMap[formInput.category]);
             formData.append("startDate", formInput.startDate);
             formData.append("endDate", formInput.endDate);
@@ -85,6 +85,19 @@ export default function NewCampaign() {
                         />
                     </div>
 
+                    {/* ✅ Description Field */}
+                    <div className="form-group">
+                        <label className="form-label">Description</label>
+                        <textarea
+                            name="description"
+                            value={formInput.description}
+                            onChange={handleInput}
+                            className="form-input"
+                            placeholder="Enter campaign description"
+                            required
+                        />
+                    </div>
+
                     <div className="form-group">
                         <label className="form-label">Category</label>
                         <select
@@ -100,18 +113,6 @@ export default function NewCampaign() {
                                 </option>
                             ))}
                         </select>
-                    </div>
-
-                    <div className="form-group">
-                        <label className="form-label">Description</label>
-                        <textarea
-                            name="description"
-                            value={formInput.description}
-                            onChange={handleInput}
-                            className="form-textarea"
-                            placeholder="Enter campaign description"
-                            required
-                        />
                     </div>
 
                     <div className="form-group">
@@ -158,15 +159,19 @@ export default function NewCampaign() {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Upload Document</label>
-                        <input
-                            type="file"
-                            name="documentFile"
-                            accept=".pdf,.jpg,.jpeg,.png"
-                            onChange={(e) => setDocumentFile(e.target.files[0])}
-                            className="form-input"
-                            required
-                        />
+                       <label className="form-label">
+    Upload Supporting Document <span style={{ color: 'gray', fontSize: '0.9em' }}>(PDF only)</span>
+</label>
+
+                       <input
+    type="file"
+    name="documentFile"
+    accept=".pdf,application/pdf"
+    onChange={(e) => setDocumentFile(e.target.files[0])}
+    className="form-input"
+    required
+/>
+
                     </div>
 
                     <button

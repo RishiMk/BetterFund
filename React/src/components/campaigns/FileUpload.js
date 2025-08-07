@@ -17,7 +17,7 @@ const MultiFileUpload = () => {
 
     const formData = new FormData();
     files.forEach((file) => {
-      formData.append("files", file); // name must match backend param
+      formData.append("files", file);
     });
 
     try {

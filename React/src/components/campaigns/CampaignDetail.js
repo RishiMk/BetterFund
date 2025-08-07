@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import CampaignComments from '../campaigns/CampaignComments';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CampaignDetail() {
     const { id } = useParams();
@@ -13,7 +15,6 @@ export default function CampaignDetail() {
 
     useEffect(() => {
         loadCampaign();
-        // eslint-disable-next-line
     }, [id]);
 
     const loadCampaign = async () => {
@@ -24,30 +25,28 @@ export default function CampaignDetail() {
             if (!res.ok) throw new Error('Campaign not found');
             const data = await res.json();
 
-            // Calculate days left from startDate and endDate
             let daysLeft = 0;
             if (data.endDate) {
                 const end = new Date(data.endDate);
                 const today = new Date();
-                // Set time to midnight for accurate day difference
-                end.setHours(0,0,0,0);
-                today.setHours(0,0,0,0);
+                end.setHours(0, 0, 0, 0);
+                today.setHours(0, 0, 0, 0);
                 daysLeft = Math.max(0, Math.ceil((end - today) / (1000 * 60 * 60 * 24)));
             }
 
-            // Map backend data to UI structure
             const mappedCampaign = {
                 id: data.campaignId,
                 name: data.title,
                 description: data.description || "No description provided.",
-                // image: "/placeholder.jpg", // Replace with data.image if available
+                image: data.imageUrl || "https://via.placeholder.com/600x300",
                 target: data.targetAmt,
                 raised: data.wallet?.amount || 0,
-                daysLeft: daysLeft,
                 category: data.category?.cname || "Uncategorized",
                 creatorId: data.user?.username || "Unknown",
                 status: data.status,
-                createdAt: data.startDate
+                createdAt: data.startDate,
+                endAt: data.endDate,
+                daysLeft: daysLeft
             };
 
             setCampaign(mappedCampaign);
@@ -65,18 +64,26 @@ export default function CampaignDetail() {
         setSuccess('');
 
         try {
-            if (!contributionAmount || contributionAmount <= 0) {
-                throw new Error('Please enter a valid amount');
-            }
+            const amount = parseFloat(contributionAmount);
+            if (!amount || amount <= 0) throw new Error('Please enter a valid amount');
+            if (campaign.raised + amount > campaign.target) throw new Error('Donation exceeds campaign target amount');
+
             const isLoggedIn = localStorage.getItem('userLoggedIn');
-            if (!isLoggedIn) {
-                throw new Error('Please login to contribute');
-            }
-            // Here you would POST to your backend to record the contribution
-            setSuccess(`Thank you for your contribution of ₹${contributionAmount}!`);
+            if (!isLoggedIn) throw new Error('Please login to contribute');
+
+            const res = await fetch(`http://localhost:5245/api/donate/${id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount })
+            });
+
+            if (!res.ok) throw new Error('Failed to process donation');
+
+            setSuccess(`Thank you for your contribution of ₹${amount}!`);
             setContributionAmount('');
             setShowContributionForm(false);
             setTimeout(() => setSuccess(''), 3000);
+            loadCampaign();
         } catch (err) {
             setError(err.message);
         } finally {
@@ -84,18 +91,16 @@ export default function CampaignDetail() {
         }
     };
 
-    const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('en-IN', {
+    const formatCurrency = (amount) =>
+        new Intl.NumberFormat('en-IN', {
             style: 'currency',
             currency: 'INR',
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(amount);
-    };
 
-    const getProgressPercentage = (raised, target) => {
-        return Math.min((raised / target) * 100, 100);
-    };
+    const getProgressPercentage = (raised, target) =>
+        Math.min((raised / target) * 100, 100);
 
     const getCategoryColor = (category) => {
         const colors = {
@@ -107,163 +112,111 @@ export default function CampaignDetail() {
         };
         return colors[category] || '#718096';
     };
+    
 
     if (loading) {
-        return (
-            <div className="container">
-                <div style={{ textAlign: 'center', padding: '2rem' }}>
-                    <p>Loading campaign details...</p>
-                </div>
-            </div>
-        );
+        return <div className="container text-center py-5">Loading campaign details...</div>;
     }
 
     if (error && !campaign) {
         return (
-            <div className="container">
-                <div style={{ textAlign: 'center', padding: '2rem' }}>
-                    <h2>Campaign Not Found</h2>
-                    <p>{error}</p>
-                    <Link to="/" className="btn">Back to Home</Link>
-                </div>
+            <div className="container text-center py-5">
+                <h2>Campaign Not Found</h2>
+                <p>{error}</p>
+                <Link to="/" className="btn btn-secondary">Back to Home</Link>
             </div>
         );
     }
 
+    const isTargetReached = campaign.raised >= campaign.target;
+
     return (
-        <div className="container">
+        <div className="container py-4">
             {campaign && (
-                <>
-                    {/* campaign header */}
-                    <div className="campaign-header">
-                        <div className="campaign-image">
-                            <img src={campaign.image} alt={campaign.name} />
-                        </div>
-                        <div className="campaign-info">
-                            <h1>{campaign.name}</h1>
-                            <span style={{
-                                background: getCategoryColor(campaign.category),
-                                color: 'white',
-                                padding: '0.5rem 1rem',
-                                borderRadius: '1rem',
-                                fontSize: '0.875rem',
-                                fontWeight: 'bold',
-                                display: 'inline-block',
-                                marginBottom: '0.5rem'
-                            }}>
-                                {campaign.category}
-                            </span>
-                            <p className="campaign-creator">by {campaign.creatorId}</p>
-                        </div>
-                    </div>
-
-                    {/* campaign stats */}
-                    <div className="campaign-stats">
-                        <div className="stat-card">
-                            <h3>Raised</h3>
-                            <p className="stat-value">{formatCurrency(campaign.raised)}</p>
-                        </div>
-                        <div className="stat-card">
-                            <h3>Target</h3>
-                            <p className="stat-value">{formatCurrency(campaign.target)}</p>
-                        </div>
-                        <div className="stat-card">
-                            <h3>Days Left</h3>
-                            <p className="stat-value">{campaign.daysLeft}</p>
-                        </div>
-                    </div>
-
-                    {/* progress bar */}
-                    <div className="progress-section">
-                        <div className="progress-bar">
-                            <div
-                                className="progress-fill"
-                                style={{ width: `${getProgressPercentage(campaign.raised, campaign.target)}%` }}
-                            ></div>
-                        </div>
-                        <p className="progress-text">
-                            {getProgressPercentage(campaign.raised, campaign.target).toFixed(1)}% of goal reached
+                <div className="card shadow-lg mb-4">
+                    {/* <img src={campaign.image} className="card-img-top" alt={campaign.name} /> */}
+                    <div className="card-body">
+                        <h2 className="card-title">{campaign.name}</h2>
+                        <p className="badge" style={{
+                            backgroundColor: getCategoryColor(campaign.category),
+                            color: '#fff',
+                            fontSize: '1rem'
+                        }}>
+                            {campaign.category}
                         </p>
-                    </div>
+                        <p className="text-muted">by {campaign.creatorId}</p>
 
-                    {/* contribution form */}
-                    {showContributionForm && (
-                        <div className="contribution-form">
-                            <h3>Make a Contribution</h3>
-                            {error && <div className="error-message">{error}</div>}
-                            {success && <div className="success-message">{success}</div>}
-
-                            <form onSubmit={handleContribute}>
-                                <div className="form-group">
-                                    <label htmlFor="amount" className="form-label">Amount (₹)</label>
-                                    <input
-                                        type="number"
-                                        id="amount"
-                                        value={contributionAmount}
-                                        onChange={(e) => setContributionAmount(e.target.value)}
-                                        className="form-input"
-                                        placeholder="Enter amount"
-                                        min="1"
-                                        required
-                                    />
-                                </div>
-                                <div className="form-buttons">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary"
-                                        disabled={contributing}
-                                    >
-                                        {contributing ? 'Processing...' : 'Contribute'}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary"
-                                        onClick={() => setShowContributionForm(false)}
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
+                        <div className="row text-center my-3">
+                            <div className="col">
+                                <h5>Raised</h5>
+                                <p>{formatCurrency(campaign.raised)}</p>
+                            </div>
+                            <div className="col">
+                                <h5>Target</h5>
+                                <p>{formatCurrency(campaign.target)}</p>
+                            </div>
+                            <div className="col">
+                                <h5>Days Left</h5>
+                                <p>{campaign.daysLeft}</p>
+                            </div>
                         </div>
-                    )}
 
-                    {/* action buttons */}
-                    {!showContributionForm && (
-                        <div className="action-buttons">
-                            <button
-                                onClick={() => setShowContributionForm(true)}
-                                className="btn btn-primary"
-                            >
+                        <div className="progress mb-3" style={{ height: '20px' }}>
+                            <div className="progress-bar" role="progressbar"
+                                style={{ width: `${getProgressPercentage(campaign.raised, campaign.target)}%` }}>
+                                {getProgressPercentage(campaign.raised, campaign.target).toFixed(0)}%
+                            </div>
+                        </div>
+
+                        {isTargetReached ? (
+                            <div className="alert alert-success mt-3">Target Reached! No more donations accepted.</div>
+                        ) : showContributionForm ? (
+                            <div className="mt-3">
+                                <h4>Contribute</h4>
+                                {error && <div className="alert alert-danger">{error}</div>}
+                                {success && <div className="alert alert-success">{success}</div>}
+                                <form onSubmit={handleContribute} className="row g-2">
+                                    <div className="col-md-6">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            placeholder="Enter amount"
+                                            value={contributionAmount}
+                                            onChange={(e) => setContributionAmount(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-md-auto">
+                                        <button className="btn btn-success" disabled={contributing}>
+                                            {contributing ? 'Processing...' : 'Donate'}
+                                        </button>
+                                        <button type="button" className="btn btn-secondary" onClick={() => setShowContributionForm(false)}>Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        ) : (
+                            <button className="btn" onClick={() => setShowContributionForm(true)}>
                                 Contribute Now
                             </button>
+                        )}
+
+                        <div className="mt-4">
+                            <h5>About</h5>
+                            <p>{campaign.description}</p>
                         </div>
-                    )}
 
-                    {/* campaign description */}
-                    <div className="campaign-description">
-                        <h2>About This Campaign</h2>
-                        <p>{campaign.description}</p>
-                    </div>
+                        <div className="mt-3 border-top pt-3">
+                            <h6>Campaign Info</h6>
+                            <p><strong>Created:</strong> {new Date(campaign.createdAt).toLocaleDateString()}</p>
+                            <p><strong>Ends:</strong> {new Date(campaign.endAt).toLocaleDateString()}</p>
+                            <p><strong>Status:</strong> {campaign.status}</p>
+                        </div>
 
-                    {/* campaign details */}
-                    <div className="campaign-details">
-                        <h3>Campaign Details</h3>
-                        <div className="details-grid">
-                            <div className="detail-item">
-                                <span className="detail-label">Created:</span>
-                                <span className="detail-value">{new Date(campaign.createdAt).toLocaleDateString()}</span>
-                            </div>
-                            <div className="detail-item">
-                                <span className="detail-label">Status:</span>
-                                <span className="detail-value">{campaign.status}</span>
-                            </div>
-                            <div className="detail-item">
-                                <span className="detail-label">Category:</span>
-                                <span className="detail-value">{campaign.category}</span>
-                            </div>
+                        <div className="mt-4">
+                            <CampaignComments campaignId={campaign.id} />
                         </div>
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

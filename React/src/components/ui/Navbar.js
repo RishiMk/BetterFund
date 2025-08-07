@@ -54,23 +54,23 @@ export default function Navbar() {
                 </Link>
 
                 <div className="nav-links">
-                    <Link to="/" className="nav-link">Home</Link>
-                    <Link to="/campaign/new" className="nav-button">Create Campaign</Link>
+                    <Link to="/" className="nav-link" style={{marginRight: '1rem'}}>Home</Link>
+                    <Link to="/campaign/new" className="btn" style={{marginRight: '1rem'}}>Create Campaign</Link>
 
                     {userType === 'admin' ? (
                         <>
-                            <Link to="/admin/dashboard" className="nav-link">Admin Dashboard</Link>
-                            <button onClick={handleLogout} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>Logout</button>
+                            <Link to="/admin/dashboard" className="btn" style={{marginRight: '1rem'}}>Admin Dashboard</Link>
+                            <button onClick={handleLogout} className="btn btn-secondary">Logout</button>
                         </>
                     ) : userType === 'user' ? (
                         <>
-                            <Link to="/profile" className="nav-link">My Profile</Link>
-                            <button onClick={handleLogout} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>Logout</button>
+                            <Link to="/profile" className="btn" style={{marginRight: '1rem'}}>My Profile</Link>
+                            <button onClick={handleLogout} className="btn btn-secondary">Logout</button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="nav-link">Login</Link>
-                            <Link to="/register" className="nav-button">Sign Up</Link>
+                            <Link to="/login" className="btn btn-secondary" style={{marginRight: '1rem'}}>Login</Link>
+                            <Link to="/register" className="btn">Sign Up</Link>
                         </>
                     )}
                 </div>

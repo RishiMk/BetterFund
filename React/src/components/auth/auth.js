@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 // auth.js - Authentication utility functions
 export const API_BASE_URL = 'http://localhost:8081';
 
@@ -117,8 +119,6 @@ export const AuthStorage = {
 };
 
 // React hook for authentication state
-import { useState, useEffect } from 'react';
-
 export const useAuth = () => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);

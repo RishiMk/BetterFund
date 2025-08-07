@@ -27,7 +27,7 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-    // ✅ REGISTER ENDPOINT
+///////////////////// ✅ REGISTER ENDPOINT //////////////////////////////////
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
         String username = body.get("username");
@@ -71,7 +71,7 @@ public class AuthController {
         ));
     }
 
-    // ✅ LOGIN ENDPOINT
+////////////////////// ✅ LOGIN ENDPOINT  ///////////////////////////////////
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
         String email = loginData.get("email");
@@ -108,7 +108,7 @@ public class AuthController {
         return ResponseEntity.ok(users);
     }
     
-    // ROLE CHANGE ENDPOINT (ADMIN ONLY)
+//////////// ROLE CHANGE ENDPOINT (ADMIN ONLY) ////////////////////////
     @PostMapping("/admin/changerole")
     public ResponseEntity<?> changeRole(@RequestParam String targetEmail,
                                         @RequestParam Integer newRoleId) {
@@ -118,4 +118,5 @@ public class AuthController {
                 : ResponseEntity.badRequest()
                       .body(Map.of("success", false, "message", "Role update failed"));
     }
+////////////////////////////////////////////////////////////////////
 }

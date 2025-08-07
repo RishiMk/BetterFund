@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Card for each campaign
+// Campaign card component
 function CampaignCard({
   name,
   description,
@@ -17,7 +17,6 @@ function CampaignCard({
   return (
     <Link to={`/campaign/${id}`} style={{ textDecoration: 'none' }}>
       <div className="card">
-        {/* <img src={imageURL || "/placeholder.jpg"} alt={name} className="card-image" /> */}
         <div className="card-content">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
             <span style={{
@@ -54,6 +53,42 @@ function CampaignCard({
   );
 }
 
+// Success story card component
+function SuccessStoryCard({ title, description, imageURL, author }) {
+  return (
+    <div className="card">
+      <img
+        src={imageURL}
+        alt="success story"
+        style={{
+          width: '100%',
+          height: 'auto',
+          borderTopLeftRadius: '0.5rem',
+          borderTopRightRadius: '0.5rem',
+        }}
+      />
+      <div className="card-content">
+        <p style={{
+          fontWeight: 'bold',
+          fontSize: '1.1rem',
+          marginBottom: '0.5rem',
+          color: '#2d3748'
+        }}>
+          {title} {/* Shows: Raised ₹X */}
+        </p>
+
+        <p className="card-description" style={{ marginBottom: '1rem' }}>
+          {description} {/* Shows: updates */}
+        </p>
+
+        <p style={{ fontSize: '0.875rem', color: '#718096' }}>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+
 // Category color mapping
 const getCategoryColor = (category) => {
   const colors = {
@@ -66,7 +101,7 @@ const getCategoryColor = (category) => {
   return colors[category] || '#718096';
 };
 
-// Feature card for "How it works"
+// How it works card component
 const Feature = ({ title, text, icon }) => (
   <div style={{ textAlign: 'center', padding: '2rem' }}>
     <div style={{
@@ -90,6 +125,7 @@ const Feature = ({ title, text, icon }) => (
 export default function Home() {
   const [campaignList, setCampaignList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [successStories, setSuccessStories] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8081/api/campaign/active")
@@ -111,31 +147,44 @@ export default function Home() {
             };
           });
         }
-        // Do NOT set fallback sample data
         setCampaignList(formatted);
-        console.log("Formatted campaigns:", formatted);
       })
       .catch(err => {
         console.error("Error fetching campaigns:", err);
-        // Do NOT set fallback sample data here
-        setCampaignList([]); // Show nothing if fetch fails
+        setCampaignList([]);
       });
   }, []);
 
-  // Categories for filter buttons
+  useEffect(() => {
+  fetch("http://localhost:5245/api/successstories")
+    .then(res => res.json())
+    .then(data => {
+      console.log("Fetched success stories:", data);
+
+      const formatted = data.map(story => ({
+        id: story.successId,
+        title: `Raised ₹${story.fundRaised?.toLocaleString() || 0}`,
+        description: story.updates,
+        imageURL: `http://localhost:5245/api/successstories/image/${story.successId}`,
+        author: "BetterFund"
+      }));
+      setSuccessStories(formatted);
+    })
+    .catch(err => {
+      console.error("Error fetching success stories:", err);
+      setSuccessStories([]);
+    });
+}, []);
+
+
+
   const categories = ['All', ...new Set(campaignList.map(c => c.category))];
 
-  // Filter campaigns by selected category
   const filteredCampaigns = selectedCategory === 'All'
     ? campaignList
     : campaignList.filter(campaign =>
         campaign.category?.toLowerCase() === selectedCategory.toLowerCase()
       );
-
-  useEffect(() => {
-    console.log("Selected category:", selectedCategory);
-    console.log("Filtered campaigns:", filteredCampaigns);
-  }, [selectedCategory, filteredCampaigns]);
 
   return (
     <div>
@@ -207,6 +256,27 @@ export default function Home() {
         )}
       </div>
 
+      {/* Success Stories Section */}
+      <div className="container" style={{ marginTop: '4rem' }}>
+        <h2 style={{
+          fontSize: '2rem',
+          marginBottom: '1rem',
+          color: '#2d3748'
+        }}>
+          Success Stories
+        </h2>
+
+        {successStories.length > 0 ? (
+          <div className="grid">
+            {successStories.map((story, index) => (
+              <SuccessStoryCard key={index} {...story} />
+            ))}
+          </div>
+        ) : (
+          <p style={{ color: '#718096' }}>No success stories found.</p>
+        )}
+      </div>
+
       <div className="container" id="howitworks">
         <h2 style={{
           fontSize: '2rem',
@@ -232,14 +302,14 @@ export default function Home() {
             text="The funds raised can be withdrawn directly to the recipient when approved by the campaign creator and platform admins."
           />
         </div>
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <h3 style={{ marginBottom: '1rem' }}>
-            For any queries raise an issue on{' '}
-            <Link to="/report-issues" className="cta-button">
-              Report Issues
-            </Link>
-          </h3>
-        </div>
+         <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                  <h3 style={{ marginBottom: '1rem' }}>
+                    For any queries or suggestions:{' '}
+                    
+                    |{' '}
+                    <Link to="/feedback" className="cta-button">Give Feedback</Link>
+                  </h3>
+                </div>
       </div>
     </div>
   );

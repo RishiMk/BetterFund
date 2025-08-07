@@ -4,12 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function UserDashboard() {
     const [userCampaigns, setUserCampaigns] = useState([]);
     const [userContributions, setUserContributions] = useState([]);
-    const [userProfile, setUserProfile] = useState({
-        name: 'John Doe',
-        email: 'user@betterfund.com',
-        totalContributed: 0,
-        campaignsCreated: 0
-    });
+    const [userProfile, setUserProfile] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,70 +19,26 @@ export default function UserDashboard() {
         loadUserData();
     }, [navigate]);
 
-    const loadUserData = () => {
-        // Sample user campaigns data
-        const sampleUserCampaigns = [
-            {
-                id: 1,
-                name: "Help Build a Community Library",
-                status: "active",
-                balance: 45000,
-                target: 100000,
-                contributors: 45,
-                requests: 2,
-                createdAt: "2024-01-15"
-            },
-            {
-                id: 2,
-                name: "Local Food Bank Support",
-                status: "pending",
-                balance: 0,
-                target: 50000,
-                contributors: 0,
-                requests: 0,
-                createdAt: "2024-01-28"
-            }
-        ];
+    const loadUserData = async () => {
+        try {
+            const userEmail = localStorage.getItem('userEmail');
+            const response = await fetch(`http://localhost:5139/api/user/profile/${userEmail}`);
+            const data = await response.json();
 
-        // Sample user contributions data
-        const sampleUserContributions = [
-            {
-                id: 1,
-                campaignId: 3,
-                campaignName: "Clean Water Project",
-                amount: 5000,
-                date: "2024-01-20",
-                status: "completed"
-            },
-            {
-                id: 2,
-                campaignId: 5,
-                campaignName: "Disaster Relief Fund",
-                amount: 2000,
-                date: "2024-01-18",
-                status: "completed"
-            },
-            {
-                id: 3,
-                campaignId: 6,
-                campaignName: "Senior Care Center",
-                amount: 1500,
-                date: "2024-01-22",
-                status: "completed"
-            }
-        ];
+            setUserProfile({
+                name: data.uname,
+                email: data.email,
+                totalContributed: data.totalContributed || 0,
+                campaignsCreated: data.campaignsCreated || 0
+            });
 
-        setUserCampaigns(sampleUserCampaigns);
-        setUserContributions(sampleUserContributions);
-
-        // Calculate user stats
-        const totalContributed = sampleUserContributions.reduce((sum, contribution) => sum + contribution.amount, 0);
-        setUserProfile(prev => ({
-            ...prev,
-            totalContributed: totalContributed,
-            campaignsCreated: sampleUserCampaigns.length
-        }));
+            setUserCampaigns(data.campaigns || []);
+            setUserContributions(data.contributions || []);
+        } catch (error) {
+            console.error('Error loading user data:', error);
+        }
     };
+
 
     const handleLogout = () => {
         localStorage.removeItem('userLoggedIn');

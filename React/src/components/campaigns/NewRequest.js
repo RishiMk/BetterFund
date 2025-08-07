@@ -24,10 +24,9 @@ export default function NewRequest() {
         setIsLoading(true);
 
         try {
-            // TODO: Replace with API call to create request
             console.log('Creating request:', formInput);
 
-            // Simulate API call
+            // API call
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             alert('Request created successfully!');

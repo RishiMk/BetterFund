@@ -20,6 +20,10 @@ public class Campaign {
     private User user;
 
     private String title;
+    private String description;
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -73,6 +77,14 @@ public class Campaign {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 	public Category getCategory() {
 		return category;
