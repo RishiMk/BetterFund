@@ -128,7 +128,7 @@ export default function Home() {
   const [successStories, setSuccessStories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/campaign/active")
+    fetch("http://localhost:8080/api/campaign/active")
       .then(res => res.json())
       .then(data => {
         let formatted = [];
@@ -156,7 +156,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-  fetch("http://localhost:5245/api/successstories")
+  fetch("http://localhost:8080/api/successstories")
     .then(res => res.json())
     .then(data => {
       console.log("Fetched success stories:", data);
@@ -165,7 +165,7 @@ export default function Home() {
         id: story.successId,
         title: `Raised ₹${story.fundRaised?.toLocaleString() || 0}`,
         description: story.updates,
-        imageURL: `http://localhost:5245/api/successstories/image/${story.successId}`,
+        imageURL: `http://localhost:8080/api/successstories/image/${story.successId}`,
         author: "BetterFund"
       }));
       setSuccessStories(formatted);

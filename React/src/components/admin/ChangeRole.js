@@ -6,7 +6,7 @@ export default function ChangeRole() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8081/api/auth/admin/users")
+    axios.get("http://localhost:8080/api/auth/admin/users")
       .then(response => {
         console.log("Fetched users:", response.data); // DEBUG
         setUsers(response.data);
@@ -17,7 +17,7 @@ export default function ChangeRole() {
   }, []);
 
   const handleChangeRole = (userId, newRoleId) => {
-    axios.post(`http://localhost:8081/api/auth/admin/changerole`, null, {
+    axios.post(`http://localhost:8080/api/auth/admin/changerole`, null, {
       params: {
         targetEmail: users.find(u => u.id === userId).email,
         newRoleId: newRoleId,

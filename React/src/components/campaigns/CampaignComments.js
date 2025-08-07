@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 export default function CampaignComments({ campaignId }) {
   const [comments, setComments] = useState([]);
@@ -6,12 +6,13 @@ export default function CampaignComments({ campaignId }) {
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem('userId');
-  const userName = localStorage.getItem('userName') || 'Anonymous';
+  // const userName = localStorage.getItem('userName') || 'Anonymous';
+
 
   // Fetch comments from backend
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:5245/api/comments?campaignId=${campaignId}`);
+      const res = await fetch(`http://localhost:8080/api/comments?campaignId=${campaignId}`);
       const data = await res.json();
       setComments(data);
     } catch (err) {
@@ -19,7 +20,7 @@ export default function CampaignComments({ campaignId }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [campaignId]);
 
   // Post new comment
   const handleSubmit = async (e) => {
@@ -27,7 +28,7 @@ export default function CampaignComments({ campaignId }) {
     if (!newComment.trim()) return;
 
     try {
-      const res = await fetch('http://localhost:5245/api/comments', {
+      const res = await fetch('http://localhost:8080/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -49,7 +50,7 @@ export default function CampaignComments({ campaignId }) {
   // Load comments on component mount or campaignId change
   useEffect(() => {
     fetchComments();
-  }, [campaignId]);
+  }, [fetchComments]);
 
   // JSX
   return (
@@ -65,7 +66,7 @@ export default function CampaignComments({ campaignId }) {
           placeholder="Write your comment..."
           style={{ width: '100%', padding: '10px', resize: 'none' }}
         />
-        <button type="submit" className="btn">
+        <button type="submit" className="btn-login">
           Post Comment
         </button>
       </form>

@@ -22,7 +22,7 @@ export default function UserDashboard() {
     const loadUserData = async () => {
         try {
             const userEmail = localStorage.getItem('userEmail');
-            const response = await fetch(`http://localhost:5139/api/user/profile/${userEmail}`);
+            const response = await fetch(`http://localhost:8080/api/user/profile/${userEmail}`);
             const data = await response.json();
 
             setUserProfile({

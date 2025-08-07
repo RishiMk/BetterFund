@@ -58,13 +58,27 @@ export default function Login() {
         <div className="container">
             
             <div className="form-container">
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
-  <img src='/BetterFundLogo.png' alt="Website Logo" width="70" height="70" />
-  <h5>BetterFund</h5>
-</div>
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '14px',
+                  marginBottom: '1.5rem',
+                }}>
+                  <img src='/BetterFundLogo.png' alt="Website Logo" width="50" height="50" style={{ borderRadius: '8px', boxShadow: '0 2px 8px rgba(44, 122, 123, 0.12)' }} />
+                  <span style={{
+                    fontWeight: 700,
+                    fontSize: '1.7rem',
+                    color: '#2c7a7b',
+                    letterSpacing: '1px',
+                    textShadow: '0 1px 4px rgba(44,122,123,0.15)'
+                  }}>BetterFund</span>
+                </div>
+              </Link>
 
 
-                <h1>Login</h1>
+                <h2 style={{ color: '#2c7a7b', fontWeight: 700 }}>Login</h2>
                 <br/>
                 {/* <p>Sign in to access your BetterFund account or admin panel.</p> */}
 
@@ -100,7 +114,7 @@ export default function Login() {
                     </div>
 
                     <div className="form-group">
-                        <button type="submit" className="btn"  disabled={isLoading}>
+                        <button type="submit" className="btn-login"  disabled={isLoading}>
                             {isLoading ? 'Logging in...' : 'Login'}
                         </button>
                     </div>

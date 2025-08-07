@@ -1,32 +1,16 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Auth Card Theme for Login/Register */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #e6fffa 0%, #f7fafc 100%);
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
-    color: #333;
-}
 
-.App {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.main-content {
-    flex: 1;
-    padding-top: 80px;
-    min-height: calc(100vh - 120px);
-}
-
-/* Navigation */
+/* .modal-card {
+  background: #fff;
+  border-radius: 16px; */
 .navbar {
     position: fixed;
     top: 0;
@@ -36,6 +20,50 @@ body {
     border-bottom: 1px solid #e2e8f0;
     z-index: 1000;
     padding: 1rem 0;
+    box-shadow: 0 2px 12px rgba(44, 122, 123, 0.10);
+}
+  /* align-items: center; */
+/* } */
+
+.btn-login {
+  background: #2c7a7b;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1.05rem;
+  margin-right: 1rem;
+  box-shadow: 0 1px 4px rgba(44,122,123,0.10);
+  transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-login:hover {
+  background: #205e61;
+}
+
+.btn-register {
+  background: #38b2ac;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1.05rem;
+  box-shadow: 0 1px 4px rgba(44,122,123,0.10);
+  transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-register:hover {
+  background: #249e9a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .nav-container {
@@ -52,6 +80,9 @@ body {
     font-weight: bold;
     color: #2c7a7b;
     text-decoration: none;
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 .nav-links {
@@ -132,7 +163,7 @@ body {
     padding: 2rem;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {

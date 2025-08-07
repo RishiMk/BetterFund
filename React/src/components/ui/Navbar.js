@@ -42,35 +42,44 @@ export default function Navbar() {
 
     return (
         <nav className="navbar">
-            <div className="nav-container">
-                <Link to="/" className="nav-logo">
-                <table>
-                    <tr>
-                        <td><img src='/BetterFundLogo.png' alt="Website Logo" width="50" height="50"/></td>
-                        <td>BetterFund</td>
-                    </tr>
-                </table>
-                
-                </Link>
+            <div className="nav-container" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="nav-logo" style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                        <img src='/BetterFundLogo.png' alt="Website Logo" width="70" height="70" style={{ verticalAlign: 'middle' }} />
+                        <span style={{ marginLeft: '0.5rem', fontWeight: 'bold', fontSize: '1.5rem', color: '#2c7a7b' }}>BetterFund</span>
+                    </Link>
+                </div>
 
                 <div className="nav-links">
-                    <Link to="/" className="nav-link" style={{marginRight: '1rem'}}>Home</Link>
-                    <Link to="/campaign/new" className="btn" style={{marginRight: '1rem'}}>Create Campaign</Link>
+                    {location.pathname !== '/' && (
+                        <Link to="/" className="nav-link" style={{marginRight: '1rem'}}>Home</Link>
+                    )}
+                    {location.pathname !== '/campaign/new' && (
+                        <Link to="/campaign/new" className="btn-login">Create Campaign</Link>
+                    )}
 
                     {userType === 'admin' ? (
                         <>
-                            <Link to="/admin/dashboard" className="btn" style={{marginRight: '1rem'}}>Admin Dashboard</Link>
-                            <button onClick={handleLogout} className="btn btn-secondary">Logout</button>
+                            {location.pathname !== '/admin/dashboard' && (
+                                <Link to="/admin/dashboard" className="btn-login">Admin Dashboard</Link>
+                            )}
+                            <button onClick={handleLogout} className="btn-login">Logout</button>
                         </>
                     ) : userType === 'user' ? (
                         <>
-                            <Link to="/profile" className="btn" style={{marginRight: '1rem'}}>My Profile</Link>
-                            <button onClick={handleLogout} className="btn btn-secondary">Logout</button>
+                            {location.pathname !== '/profile' && (
+                                <Link to="/profile" className="btn-login">My Profile</Link>
+                            )}
+                            <button onClick={handleLogout} className="btn-login">Logout</button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="btn btn-secondary" style={{marginRight: '1rem'}}>Login</Link>
-                            <Link to="/register" className="btn">Sign Up</Link>
+                            {location.pathname !== '/login' && (
+                                <Link to="/login" className="btn-login">Login</Link>
+                            )}
+                            {location.pathname !== '/register' && (
+                                <Link to="/register" className="btn-register">Sign Up</Link>
+                            )}
                         </>
                     )}
                 </div>

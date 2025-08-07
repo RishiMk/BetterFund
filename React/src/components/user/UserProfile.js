@@ -31,7 +31,7 @@ export default function UserProfile() {
     try {
       /* Profile summary */
       const profileRes = await fetch(
-        `http://localhost:5245/api/user/profile/${userId}`
+        `http://localhost:8080/api/user/profile/${userId}`
       );
       if (!profileRes.ok) throw new Error('Profile fetch failed');
       const profile = await profileRes.json();
@@ -39,7 +39,7 @@ export default function UserProfile() {
 
       /* My campaigns – NEW endpoint */
       const campaignsRes = await fetch(
-        `http://localhost:5245/api/user/${userId}/campaigns`
+        `http://localhost:8080/api/user/${userId}/campaigns`
       );
       if (!campaignsRes.ok) throw new Error('Campaigns fetch failed');
       const campaigns = await campaignsRes.json();
@@ -60,7 +60,7 @@ export default function UserProfile() {
 
       /* Contributions (already wired) */
       const contribRes = await fetch(
-        `http://localhost:5245/api/user/${userId}/contributions`
+        `http://localhost:8080/api/user/${userId}/contributions`
       );
       if (!contribRes.ok) throw new Error('Contributions fetch failed');
       const contributions = await contribRes.json();

@@ -21,7 +21,7 @@ export default function CampaignDetail() {
         setLoading(true);
         setError('');
         try {
-            const res = await fetch(`http://localhost:8081/api/campaign/${id}`);
+            const res = await fetch(`http://localhost:8080/api/campaign/${id}`);
             if (!res.ok) throw new Error('Campaign not found');
             const data = await res.json();
 
@@ -71,7 +71,7 @@ export default function CampaignDetail() {
             const isLoggedIn = localStorage.getItem('userLoggedIn');
             if (!isLoggedIn) throw new Error('Please login to contribute');
 
-            const res = await fetch(`http://localhost:5245/api/donate/${id}`, {
+            const res = await fetch(`http://localhost:8080/api/donate/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ amount })
