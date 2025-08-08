@@ -176,7 +176,7 @@ export default function NewCampaign() {
 
                     <button
                         type="submit"
-                        className="btn"
+                        className="btn-login"
                         style={{ width: '100%' }}
                         disabled={isLoading}
                     >

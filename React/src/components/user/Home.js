@@ -197,7 +197,7 @@ export default function Home() {
           Crowdfunding for Social Welfare <br />
           Transparent & Secure 😄
         </h1>
-        <Link to="/campaign/new" className="btn">
+        <Link to="/campaign/new" className="btn-login">
           Create Campaign
         </Link>
       </div>

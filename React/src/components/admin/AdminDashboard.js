@@ -227,14 +227,6 @@ export default function AdminDashboard() {
           }}
         >
           <h1>Admin Dashboard</h1>
-          <div>
-            <Link to="/" className="btn" style={{ marginRight: '1rem' }}>
-              View Site
-            </Link>
-            <button onClick={handleLogout} className="btn">
-              Logout
-            </button>
-          </div>
         </div>
 
         {/* Tab Navigation */}
