@@ -188,7 +188,26 @@ export default function Home() {
 
   return (
     <div>
-      <div className="container">
+      {/* Banner Section */}
+      <div className="container" style={{ width: '100%', background: 'linear-gradient(90deg, #e6fffa 0%, #f7fafc 100%)', padding: '2.5rem 0 1.5rem 0', marginBottom: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <img
+          src="/BetterFundLogo.png"
+          alt="BetterFund Banner"
+          style={{ maxWidth: 200, width: '100%', marginBottom: '1.5rem', boxShadow: '0 4px 24px rgba(44,122,123,0.10)' }}
+        />
+        <h2 style={{ fontSize: '2.2rem', color: '#2d3748', marginBottom: '0.5rem', textAlign: 'center' }}>
+          Need Funds to Pay For a Medical Emergency or Social Cause?
+        </h2>
+        <div style={{ margin: '1.5rem 0' }}>
+          <Link to="/campaign/new" className="btn" style={{ fontSize: 20, padding: '0.8rem 2.5rem', borderRadius: 8, background: '#2c7a7b', color: '#fff', fontWeight: 600, boxShadow: '0 2px 8px rgba(44,122,123,0.10)' }}>
+            Start a Fundraiser for FREE
+          </Link>
+        </div>
+        <div style={{ color: '#2d3748', fontWeight: 500, fontSize: '1.1rem', marginTop: 8 }}>
+          BetterFund’s <span style={{ fontWeight: 700, fontSize: '1.2rem', color: '#2c7a7b' }}>0%</span> Platform fees* ensures maximum funds for you
+        </div>
+      </div>
+      {/* <div className="container">
         <h1 style={{
           fontSize: '3rem',
           marginBottom: '2rem',
@@ -200,7 +219,7 @@ export default function Home() {
         <Link to="/campaign/new" className="btn-login">
           Create Campaign
         </Link>
-      </div>
+      </div> */}
 
       <div className="container">
         <h2 style={{
