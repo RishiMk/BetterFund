@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj": {}
+    "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj": {
+    "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj",
+        "projectUniqueName": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj",
         "projectName": "DonateAndUser_Service",
-        "projectPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj",
+        "projectPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\DonateAndUser_Service.csproj",
         "packagesPath": "C:\\Users\\rushi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\obj\\",
+        "outputPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

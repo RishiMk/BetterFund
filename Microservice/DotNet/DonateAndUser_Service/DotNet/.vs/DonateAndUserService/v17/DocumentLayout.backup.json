@@ -1,70 +1,70 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\",
+  "WorkspaceRootPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\p13crowdfundingdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\p13crowdfundingdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\p13crowdfundingdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\successstory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\successstory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\successstory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\donation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\donation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\donation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\controllers\\donatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\controllers\\donatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:controllers\\donatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\models\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\donateanduser_service\\dotnet\\models\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:models\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\donateanduser_service\\dotnet\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|DonateAndUser_Service.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,195 +82,109 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Properties\\launchSettings.json",
               "RelativeToolTip": "Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-07T13:51:58.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Wallet.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Wallet.cs",
-              "RelativeDocumentMoniker": "Models\\Wallet.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Wallet.cs",
-              "RelativeToolTip": "Models\\Wallet.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T13:50:07.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T13:51:58.595Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Title": "Wallet.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Wallet.cs",
+              "RelativeDocumentMoniker": "Models\\Wallet.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Wallet.cs",
+              "RelativeToolTip": "Models\\Wallet.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T13:50:00.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T13:50:07.239Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "SuccessStory.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\SuccessStory.cs",
-              "RelativeDocumentMoniker": "Models\\SuccessStory.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\SuccessStory.cs",
-              "RelativeToolTip": "Models\\SuccessStory.cs",
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T13:49:54.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T13:50:00.133Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "Role.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Role.cs",
-              "RelativeDocumentMoniker": "Models\\Role.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Role.cs",
-              "RelativeToolTip": "Models\\Role.cs",
+              "Title": "SuccessStory.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\SuccessStory.cs",
+              "RelativeDocumentMoniker": "Models\\SuccessStory.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\SuccessStory.cs",
+              "RelativeToolTip": "Models\\SuccessStory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T13:49:48.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T13:49:54.179Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Feedback.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Feedback.cs",
-              "RelativeDocumentMoniker": "Models\\Feedback.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Feedback.cs",
-              "RelativeToolTip": "Models\\Feedback.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T13:49:32.235Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Category.cs",
-              "RelativeDocumentMoniker": "Models\\Category.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Category.cs",
-              "RelativeToolTip": "Models\\Category.cs",
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "Models\\Role.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Role.cs",
+              "RelativeToolTip": "Models\\Role.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:55:03.701Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBMAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T05:09:06.136Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "P13CrowdfundingDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\P13CrowdfundingDbContext.cs",
-              "RelativeDocumentMoniker": "Models\\P13CrowdfundingDbContext.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\P13CrowdfundingDbContext.cs",
-              "RelativeToolTip": "Models\\P13CrowdfundingDbContext.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwBwAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:55:11.586Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Document.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Document.cs",
-              "RelativeDocumentMoniker": "Models\\Document.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Document.cs",
-              "RelativeToolTip": "Models\\Document.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:55:06.535Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Comment.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Comment.cs",
-              "RelativeDocumentMoniker": "Models\\Comment.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Comment.cs",
-              "RelativeToolTip": "Models\\Comment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:55:05.279Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T13:49:48.922Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-07T05:18:05.143Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "DonateController.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\DonateController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DonateController.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\DonateController.cs",
-              "RelativeToolTip": "Controllers\\DonateController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T06:25:10.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Campaign.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Campaign.cs",
-              "RelativeDocumentMoniker": "Models\\Campaign.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Campaign.cs",
-              "RelativeToolTip": "Models\\Campaign.cs",
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "Models\\Category.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Category.cs",
+              "RelativeToolTip": "Models\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:55:01.093Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T07:55:03.701Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBMAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-06T05:09:06.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "P13CrowdfundingDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\P13CrowdfundingDbContext.cs",
+              "RelativeDocumentMoniker": "Models\\P13CrowdfundingDbContext.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\P13CrowdfundingDbContext.cs",
+              "RelativeToolTip": "Models\\P13CrowdfundingDbContext.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T07:55:11.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\UserController.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAqwEsAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-06T05:13:27.541Z",
               "EditorCaption": ""
@@ -278,15 +192,86 @@
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Feedback.cs",
+              "RelativeDocumentMoniker": "Models\\Feedback.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Feedback.cs",
+              "RelativeToolTip": "Models\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T13:49:32.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Document.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Document.cs",
+              "RelativeDocumentMoniker": "Models\\Document.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Document.cs",
+              "RelativeToolTip": "Models\\Document.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T07:55:06.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "Models\\Comment.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Comment.cs",
+              "RelativeToolTip": "Models\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T07:55:05.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-07T05:18:05.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DonateController.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\DonateController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DonateController.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Controllers\\DonateController.cs",
+              "RelativeToolTip": "Controllers\\DonateController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T06:25:10.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Campaign.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Campaign.cs",
+              "RelativeDocumentMoniker": "Models\\Campaign.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Campaign.cs",
+              "RelativeToolTip": "Models\\Campaign.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T07:55:01.093Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Donation.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Donation.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Donation.cs",
               "RelativeDocumentMoniker": "Models\\Donation.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Donation.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\DonateAndUser_Service\\DotNet\\Models\\Donation.cs",
               "RelativeToolTip": "Models\\Donation.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAA5wAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:55:09.798Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T07:55:09.798Z"
             }
           ]
         }

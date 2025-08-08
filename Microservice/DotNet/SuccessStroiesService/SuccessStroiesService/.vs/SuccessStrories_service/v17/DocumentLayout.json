@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\",
+  "WorkspaceRootPath": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\successstroiesservice\\successstroiesservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\successstroiesservice\\successstroiesservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\successstroiesservice\\successstroiesservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\successstroiesservice\\successstroiesservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\successstroiesservice\\successstroiesservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\successstroiesservice\\successstroiesservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\successstroiesservice\\successstroiesservice\\controllers\\successstoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\successstroiesservice\\successstroiesservice\\controllers\\successstoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|solutionrelative:controllers\\successstoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\successstroiesservice\\successstroiesservice\\models\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\successstroiesservice\\successstroiesservice\\models\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|solutionrelative:models\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\dotnet\\successstroiesservice\\successstroiesservice\\successstories_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|c:\\users\\rushi\\desktop\\cdac\\project\\microservice\\dotnet\\successstroiesservice\\successstroiesservice\\successstories_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{C01239D7-19B1-4AC2-8062-4DA683BD252F}|SuccessStories_service.csproj|solutionrelative:successstories_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
@@ -44,35 +44,33 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Campaign.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Models\\Campaign.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Models\\Campaign.cs",
               "RelativeDocumentMoniker": "Models\\Campaign.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Models\\Campaign.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Models\\Campaign.cs",
               "RelativeToolTip": "Models\\Campaign.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T08:17:00.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T08:17:00.989Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Properties\\launchSettings.json",
               "RelativeToolTip": "Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-07T07:46:32.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T07:46:32.886Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Program.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAQwDoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -83,40 +81,37 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\appsettings.json",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-07T07:43:36.849Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T07:43:36.849Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "SuccessStories_service.csproj",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\SuccessStories_service.csproj",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\SuccessStories_service.csproj",
               "RelativeDocumentMoniker": "SuccessStories_service.csproj",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\SuccessStories_service.csproj",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\SuccessStories_service.csproj",
               "RelativeToolTip": "SuccessStories_service.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-07T07:26:23.266Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T07:26:23.266Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "SuccessStoriesController.cs",
-              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Controllers\\SuccessStoriesController.cs",
+              "DocumentMoniker": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Controllers\\SuccessStoriesController.cs",
               "RelativeDocumentMoniker": "Controllers\\SuccessStoriesController.cs",
-              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Controllers\\SuccessStoriesController.cs",
+              "ToolTip": "C:\\Users\\rushi\\Desktop\\CDAC\\Project\\Microservice\\DotNet\\SuccessStroiesService\\SuccessStroiesService\\Controllers\\SuccessStoriesController.cs",
               "RelativeToolTip": "Controllers\\SuccessStoriesController.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAcwAwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T07:07:22.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T07:07:22.409Z"
             }
           ]
         }

@@ -24,17 +24,17 @@ spring:
         - id: approve-campaign
           uri: http://localhost:8082
           predicates:
-            - Path=/api/admin/campaigns/{id}/approve
+            - Path=/api/admin/campaigns/*/approve
           filters:
-            - RewritePath=/api/admin/campaigns/(?<id>.*)/approve, /campaigns/${id}/approve
+            - RewritePath=/api/admin/campaigns/(?<id>[^/]+)/approve, /api/admin/campaigns/${id}/approve
 
         # ❌ Admin Campaign Rejection
         - id: reject-campaign
           uri: http://localhost:8082
           predicates:
-            - Path=/api/admin/campaigns/{id}/reject
+            - Path=/api/admin/campaigns/*/reject
           filters:
-            - RewritePath=/api/admin/campaigns/(?<id>.*)/reject, /campaigns/${id}/reject
+            - RewritePath=/api/admin/campaigns/(?<id>[^/]+)/reject, /api/admin/campaigns/${id}/reject
 
         # 🏆 Success Story Service
         - id: success-story-service

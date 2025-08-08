@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CommentsAndFeedback_Service",
+    "\\CommentsAndFeedback_Service\\DotNet",
+    "\\CommentsAndFeedback_Service\\DotNet\\Controllers",
+    "\\DonateAndUser_Service",
+    "\\DonateAndUser_Service\\DotNet",
+    "\\SuccessStroiesService"
+  ],
+  "SelectedNode": "\\CommentsAndFeedback_Service\\DotNet\\Controllers\\FeedbackController.cs",
+  "PreviewInSolutionExplorer": false
+}
