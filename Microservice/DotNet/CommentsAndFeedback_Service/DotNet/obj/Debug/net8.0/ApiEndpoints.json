@@ -32,6 +32,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "UserDashboard_Dotnet.Controllers.CommentsController",
+    "Method": "Delete",
+    "RelativePath": "api/Comments/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CommentsAndFeedback_Service.Controllers.FeedbackController",
     "Method": "PostFeedback",
     "RelativePath": "api/Feedback",

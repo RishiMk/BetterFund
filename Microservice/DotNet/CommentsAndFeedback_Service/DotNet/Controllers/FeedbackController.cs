@@ -19,7 +19,7 @@ namespace CommentsAndFeedback_Service.Controllers
         [HttpPost]
         public async Task<IActionResult> PostFeedback([FromBody] Feedback feedback)
         {
-            // Optional: check if user exists
+            // Check if user exists
             var userExists = await _context.Users.AnyAsync(u => u.UserId == feedback.UserId);
             if (!userExists)
             {
@@ -35,7 +35,7 @@ namespace CommentsAndFeedback_Service.Controllers
             return Ok(new { message = "Feedback submitted successfully." });
         }
 
-        // GET: api/feedback/1 (optional — to fetch user or feedback)
+        // GET: api/feedback/1
         [HttpGet("{id}")]
         public async Task<ActionResult<Feedback>> GetFeedback(int id)
         {

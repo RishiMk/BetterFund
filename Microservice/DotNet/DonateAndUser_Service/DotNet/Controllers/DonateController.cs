@@ -21,8 +21,10 @@ public class DonateController : ControllerBase
         if (request.Amount <= 0)
             return BadRequest("Invalid donation amount.");
 
+        // 🔹 Load campaign and wallet without tracking User entities
         var campaign = await _context.Campaigns
             .Include(c => c.Wallet)
+            .AsNoTracking() // prevents tracking Campaign/User relationships
             .FirstOrDefaultAsync(c => c.CampaignId == campaignId);
 
         if (campaign == null)
@@ -34,11 +36,7 @@ public class DonateController : ControllerBase
         if (campaign.Wallet.Amount + request.Amount > campaign.TargetAmt)
             return BadRequest("Donation exceeds target amount.");
 
-        // Update wallet balance
-        campaign.Wallet.Amount += request.Amount;
-        campaign.Wallet.CurBalance += request.Amount;
-
-        // Create a new donation record
+        // 🔹 Create new donation record
         var donation = new Donation
         {
             Amount = request.Amount,
@@ -47,11 +45,25 @@ public class DonateController : ControllerBase
             DonationTime = DateTime.Now
         };
 
+        // 🛡️ Detach any tracked User entities before saving to avoid role changes
+        var trackedUsers = _context.ChangeTracker.Entries<User>().ToList();
+        foreach (var entry in trackedUsers)
+        {
+            entry.State = EntityState.Detached;
+        }
+
+        // 🔹 Attach wallet to context and update amounts
+        _context.Wallets.Attach(campaign.Wallet);
+        campaign.Wallet.Amount += request.Amount;
+        campaign.Wallet.CurBalance += request.Amount;
+
+        // 🔹 Save donation
         _context.Donations.Add(donation);
         await _context.SaveChangesAsync();
 
         return Ok(new { message = $"Successfully donated ₹{request.Amount}" });
     }
+
 }
 
 public class DonationRequest

@@ -56,6 +56,29 @@
         }
       }
     },
+    "/api/Comments/{id}": {
+      "delete": {
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Feedback": {
       "post": {
         "tags": [
@@ -170,11 +193,6 @@
             "format": "int32",
             "nullable": true
           },
-          "documents": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
           "documentId": {
             "type": "integer",
             "format": "int32",
@@ -197,17 +215,17 @@
           "document": {
             "$ref": "#/components/schemas/Document"
           },
-          "documentsNavigation": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Document"
-            },
-            "nullable": true
-          },
           "donations": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Donation"
+            },
+            "nullable": true
+          },
+          "successStories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuccessStory"
             },
             "nullable": true
           },
@@ -216,13 +234,6 @@
           },
           "wallet": {
             "$ref": "#/components/schemas/Wallet"
-          },
-          "wallets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Wallet"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -301,11 +312,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "campaignId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "documents": {
             "type": "string",
             "format": "byte",
@@ -318,9 +324,6 @@
           "fileName": {
             "type": "string",
             "nullable": true
-          },
-          "campaign": {
-            "$ref": "#/components/schemas/Campaign"
           },
           "campaigns": {
             "type": "array",
@@ -412,6 +415,37 @@
         },
         "additionalProperties": false
       },
+      "SuccessStory": {
+        "type": "object",
+        "properties": {
+          "successId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaignId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updates": {
+            "type": "string",
+            "nullable": true
+          },
+          "images": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "fundRaised": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          }
+        },
+        "additionalProperties": false
+      },
       "User": {
         "type": "object",
         "properties": {
@@ -488,11 +522,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "campaignId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "amount": {
             "type": "number",
             "format": "float"
@@ -504,9 +533,6 @@
           "creationDate": {
             "type": "string",
             "format": "date"
-          },
-          "campaign": {
-            "$ref": "#/components/schemas/Campaign"
           },
           "campaigns": {
             "type": "array",

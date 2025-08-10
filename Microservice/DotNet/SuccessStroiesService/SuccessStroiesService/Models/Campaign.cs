@@ -23,8 +23,6 @@ public partial class Campaign
 
     public int? WalletId { get; set; }
 
-    public byte[]? Documents { get; set; }
-
     public int? DocumentId { get; set; }
 
     public string? Description { get; set; }
@@ -35,13 +33,11 @@ public partial class Campaign
 
     public virtual Document? Document { get; set; }
 
-    public virtual ICollection<Document> DocumentsNavigation { get; set; } = new List<Document>();
-
     public virtual ICollection<Donation> Donations { get; set; } = new List<Donation>();
+
+    public virtual ICollection<SuccessStory> SuccessStories { get; set; } = new List<SuccessStory>();
 
     public virtual User User { get; set; } = null!;
 
     public virtual Wallet? Wallet { get; set; }
-
-    public virtual ICollection<Wallet> Wallets { get; set; } = new List<Wallet>();
 }

@@ -136,7 +136,7 @@ public class CampaignController {
     public ResponseEntity<?> createCampaign(
             @RequestParam Integer userId,
             @RequestParam String title,
-            @RequestParam String description, // 👈 New Param
+            @RequestParam String description,
             @RequestParam Integer categoryId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,

@@ -66,9 +66,6 @@ public partial class P13CrowdfundingDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("description");
             entity.Property(e => e.DocumentId).HasColumnName("document_id");
-            entity.Property(e => e.Documents)
-                .HasColumnType("mediumblob")
-                .HasColumnName("documents");
             entity.Property(e => e.EndDate).HasColumnName("end_date");
             entity.Property(e => e.StartDate).HasColumnName("start_date");
             entity.Property(e => e.Status)
@@ -146,10 +143,7 @@ public partial class P13CrowdfundingDbContext : DbContext
 
             entity.ToTable("documents");
 
-            entity.HasIndex(e => e.CampaignId, "fk_documents_campaign");
-
             entity.Property(e => e.DocumentId).HasColumnName("document_id");
-            entity.Property(e => e.CampaignId).HasColumnName("campaign_id");
             entity.Property(e => e.ContentType)
                 .HasMaxLength(255)
                 .HasColumnName("content_type");
@@ -157,10 +151,6 @@ public partial class P13CrowdfundingDbContext : DbContext
             entity.Property(e => e.FileName)
                 .HasMaxLength(255)
                 .HasColumnName("file_name");
-
-            entity.HasOne(d => d.Campaign).WithMany(p => p.DocumentsNavigation)
-                .HasForeignKey(d => d.CampaignId)
-                .HasConstraintName("fk_documents_campaign");
         });
 
         modelBuilder.Entity<Donation>(entity =>
@@ -232,14 +222,24 @@ public partial class P13CrowdfundingDbContext : DbContext
 
             entity.ToTable("success_stories");
 
+            entity.HasIndex(e => e.CampaignId, "campaign_id");
+
             entity.Property(e => e.SuccessId).HasColumnName("success_id");
-            entity.Property(e => e.FundRaised).HasColumnName("fund_raised");
+            entity.Property(e => e.CampaignId).HasColumnName("campaign_id");
+            entity.Property(e => e.FundRaised)
+                .HasDefaultValueSql("'0'")
+                .HasColumnName("fund_raised");
             entity.Property(e => e.Images)
                 .HasColumnType("mediumblob")
                 .HasColumnName("images");
             entity.Property(e => e.Updates)
                 .HasMaxLength(200)
                 .HasColumnName("updates");
+
+            entity.HasOne(d => d.Campaign).WithMany(p => p.SuccessStories)
+                .HasForeignKey(d => d.CampaignId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("success_stories_ibfk_1");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -284,20 +284,13 @@ public partial class P13CrowdfundingDbContext : DbContext
 
             entity.ToTable("wallet");
 
-            entity.HasIndex(e => e.CampaignId, "fk_wallet_campaign");
-
             entity.HasIndex(e => e.UserId, "user_id");
 
             entity.Property(e => e.WalletId).HasColumnName("wallet_id");
             entity.Property(e => e.Amount).HasColumnName("amount");
-            entity.Property(e => e.CampaignId).HasColumnName("campaign_id");
             entity.Property(e => e.CreationDate).HasColumnName("creation_date");
             entity.Property(e => e.CurBalance).HasColumnName("cur_balance");
             entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.Campaign).WithMany(p => p.Wallets)
-                .HasForeignKey(d => d.CampaignId)
-                .HasConstraintName("fk_wallet_campaign");
 
             entity.HasOne(d => d.User).WithMany(p => p.Wallets)
                 .HasForeignKey(d => d.UserId)

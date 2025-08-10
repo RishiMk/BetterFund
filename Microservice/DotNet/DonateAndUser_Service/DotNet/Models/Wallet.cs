@@ -9,15 +9,11 @@ public partial class Wallet
 
     public int UserId { get; set; }
 
-    public int? CampaignId { get; set; }
-
     public float Amount { get; set; }
 
     public float CurBalance { get; set; }
 
     public DateOnly CreationDate { get; set; }
-
-    public virtual Campaign? Campaign { get; set; }
 
     public virtual ICollection<Campaign> Campaigns { get; set; } = new List<Campaign>();
 

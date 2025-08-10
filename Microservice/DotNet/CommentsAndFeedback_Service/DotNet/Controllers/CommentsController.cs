@@ -52,17 +52,17 @@ namespace UserDashboard_Dotnet.Controllers
             return CreatedAtAction(nameof(Get), new { campaignId = comment.CampaignId }, comment);
         }
 
-        // DELETE: api/comments/5
-        //[HttpDelete("{id:int}")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var comment = await _ctx.Comments.FindAsync(id);
-        //    if (comment == null) return NotFound();
+        //DELETE: api/comments/5
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var comment = await _ctx.Comments.FindAsync(id);
+            if (comment == null) return NotFound();
 
-        //    _ctx.Comments.Remove(comment);
-        //    await _ctx.SaveChangesAsync();
-        //    return NoContent();
-        //}
+            _ctx.Comments.Remove(comment);
+            await _ctx.SaveChangesAsync();
+            return NoContent();
+        }
 
 
     }

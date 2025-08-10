@@ -46,12 +46,12 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "Updates": {
-                    "type": "string"
+                  "campaignId": {
+                    "type": "integer",
+                    "format": "int32"
                   },
-                  "FundRaised": {
-                    "type": "number",
-                    "format": "float"
+                  "updates": {
+                    "type": "string"
                   },
                   "images": {
                     "type": "string",
@@ -60,10 +60,10 @@
                 }
               },
               "encoding": {
-                "Updates": {
+                "campaignId": {
                   "style": "form"
                 },
-                "FundRaised": {
+                "updates": {
                   "style": "form"
                 },
                 "images": {
@@ -180,14 +180,294 @@
           }
         }
       }
+    },
+    "/api/SuccessStories/completed": {
+      "get": {
+        "tags": [
+          "SuccessStories"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Campaign": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetAmt": {
+            "type": "number",
+            "format": "float"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "walletId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "documentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            },
+            "nullable": true
+          },
+          "document": {
+            "$ref": "#/components/schemas/Document"
+          },
+          "donations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Donation"
+            },
+            "nullable": true
+          },
+          "successStories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuccessStory"
+            },
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Wallet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cname": {
+            "type": "string",
+            "nullable": true
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Campaign"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaignId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documents": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Campaign"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Donation": {
+        "type": "object",
+        "properties": {
+          "donationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "format": "float"
+          },
+          "campaignid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "walletId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "donationTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Wallet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "feedbackId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rname": {
+            "type": "string",
+            "nullable": true
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "SuccessStory": {
         "type": "object",
         "properties": {
           "successId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaignId": {
             "type": "integer",
             "format": "int32"
           },
@@ -204,6 +484,117 @@
             "type": "number",
             "format": "float",
             "nullable": true
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uname": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "adharNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Campaign"
+            },
+            "nullable": true
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            },
+            "nullable": true
+          },
+          "feedbacks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Feedback"
+            },
+            "nullable": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          },
+          "wallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Wallet"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "walletId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "format": "float"
+          },
+          "curBalance": {
+            "type": "number",
+            "format": "float"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Campaign"
+            },
+            "nullable": true
+          },
+          "donations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Donation"
+            },
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
           }
         },
         "additionalProperties": false

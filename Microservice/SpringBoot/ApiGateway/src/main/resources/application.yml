@@ -36,13 +36,51 @@ spring:
           filters:
             - RewritePath=/api/admin/campaigns/(?<id>[^/]+)/reject, /api/admin/campaigns/${id}/reject
 
-        # 🏆 Success Story Service
-        - id: success-story-service
+        # 🏆 Success Stories - List latest 4
+        - id: get-success-stories
           uri: http://localhost:8085
           predicates:
-            - Path=/api/successstories/**
+            - Path=/api/successstories
           filters:
-            - RewritePath=/api/successstories(?<segment>/?.*), /api/successstories${segment}
+            - RewritePath=/api/successstories, /api/successstories
+
+        # 🏆 Success Story by ID
+        - id: get-success-story-by-id
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/successstories/{id}
+          filters:
+            - RewritePath=/api/successstories/(?<id>.*), /api/successstories/${id}
+
+        # 🏆 Success Story Image
+        - id: get-success-story-image
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/successstories/image/{id}
+          filters:
+            - RewritePath=/api/successstories/image/(?<id>.*), /api/successstories/image/${id}
+
+        # 🏆 Create Success Story
+        - id: create-success-story
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/successstories
+          filters:
+            - RewritePath=/api/successstories, /api/successstories
+
+        # 🏆 Completed Campaigns without Stories
+        - id: get-completed-campaigns
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/SuccessStories/completed
+
+        # 🏆 Delete Success Story
+        - id: delete-success-story
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/successstories/{id}
+          filters:
+            - RewritePath=/api/successstories/(?<id>.*), /api/successstories/${id}
 
         # 💬 Comments Service (handled by .NET)
         - id: comments-service
