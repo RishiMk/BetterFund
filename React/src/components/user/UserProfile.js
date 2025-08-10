@@ -118,7 +118,7 @@ export default function UserProfile() {
           <Link to="/" className="btn btn-secondary" style={{ marginRight: '1rem' }}>
             Back to Home
           </Link>
-          <button onClick={handleLogout} className="btn">
+          <button onClick={handleLogout} className="btn-login">
             Logout
           </button>
         </div>
@@ -190,7 +190,7 @@ function ProfileTab({ profile, onCreate }) {
       </div>
 
       <div>
-        <button onClick={onCreate} className="btn">
+        <button onClick={onCreate} className="btn-login">
           Create New Campaign
         </button>
       </div>

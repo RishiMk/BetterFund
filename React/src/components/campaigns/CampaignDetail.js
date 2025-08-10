@@ -195,7 +195,7 @@ export default function CampaignDetail() {
                                 </form>
                             </div>
                         ) : (
-                            <button className="btn" onClick={() => setShowContributionForm(true)}>
+                            <button className="btn-login" onClick={() => setShowContributionForm(true)}>
                                 Contribute Now
                             </button>
                         )}

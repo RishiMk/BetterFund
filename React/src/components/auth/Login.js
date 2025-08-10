@@ -82,7 +82,7 @@ export default function Login() {
                 <br/>
                 {/* <p>Sign in to access your BetterFund account or admin panel.</p> */}
 
-                {error && <div className="alert alert-error">{error}</div>}
+                {error && <div className="alert-error">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

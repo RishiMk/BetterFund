@@ -6,6 +6,7 @@ export default function CampaignComments({ campaignId }) {
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem('userId');
+  const userRole = localStorage.getItem('userRole');
   // const userName = localStorage.getItem('userName') || 'Anonymous';
 
 
@@ -47,6 +48,21 @@ export default function CampaignComments({ campaignId }) {
     }
   };
 
+
+  // Delete comment by id
+  const handleDelete = async (commentId) => {
+    if (!window.confirm('Are you sure you want to delete this comment?')) return;
+    try {
+      const res = await fetch(`http://localhost:8080/api/comments/${commentId}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) throw new Error('Failed to delete comment');
+      await fetchComments();
+    } catch (err) {
+      console.error('Error deleting comment:', err);
+    }
+  };
+
   // Load comments on component mount or campaignId change
   useEffect(() => {
     fetchComments();
@@ -85,10 +101,30 @@ export default function CampaignComments({ campaignId }) {
               padding: '10px',
               border: '1px solid #ccc',
               borderRadius: '5px',
+              position: 'relative',
             }}
           >
             <strong>{c.userName || `User #${c.userId}`}</strong>
             <p>{c.text}</p>
+            {(String(c.userId) === String(userId) || (userRole && userRole.toLowerCase() === 'admin')) && (
+              <button
+                onClick={() => handleDelete(c.commentId)}
+                style={{
+                  position: 'absolute',
+                  top: 10,
+                  right: 10,
+                  background: '#ff4d4f',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '3px',
+                  padding: '2px 8px',
+                  cursor: 'pointer',
+                }}
+                title="Delete comment"
+              >
+                Delete
+              </button>
+            )}
           </div>
         ))
       )}

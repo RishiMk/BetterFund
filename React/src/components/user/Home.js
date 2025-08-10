@@ -1,88 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-// Campaign card component
-function CampaignCard({
-  name,
-  description,
-  creatorId,
-  imageURL,
-  id,
-  balance,
-  target,
-  category,
-}) {
-  const progressPercentage = target > 0 ? (balance / target) * 100 : 0;
-
+import { AuthStorage } from '../auth/auth';
+// Unified Card component for both Campaign and Success Story
+function UnifiedCard(props) {
+  const isCampaign = props.hasOwnProperty('balance');
+  const progressPercentage = isCampaign && props.target > 0 ? (props.balance / props.target) * 100 : null;
   return (
-    <Link to={`/campaign/${id}`} style={{ textDecoration: 'none' }}>
-      <div className="card">
-        <div className="card-content">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <span style={{
-              background: getCategoryColor(category),
-              color: 'white',
-              padding: '0.25rem 0.75rem',
-              borderRadius: '1rem',
-              fontSize: '0.75rem',
-              fontWeight: 'bold'
-            }}>
-              {category}
-            </span>
-          </div>
-          <h3 className="card-title">{name}</h3>
-          <p className="card-description">{description}</p>
-          <p style={{ marginBottom: '0.5rem' }}>
-            <strong>₹{balance.toLocaleString()}</strong> raised
-          </p>
-          <p style={{ marginBottom: '1rem', color: '#718096' }}>
-            Target: ₹{target.toLocaleString()}
-          </p>
-          <div className="card-progress">
-            <div
-              className="card-progress-bar"
-              style={{ width: `${Math.min(progressPercentage, 100)}%` }}
-            ></div>
-          </div>
-          <p style={{ fontSize: '0.875rem', color: '#718096' }}>
-            by {creatorId}
-          </p>
+    <div className="card unified-card">
+      {/* Only show image for success stories, not for campaigns */}
+      {!isCampaign && props.imageURL && (
+        <div className="card-image-wrapper">
+          <img
+            src={props.imageURL}
+            alt="success story"
+            className="card-image"
+          />
         </div>
-      </div>
-    </Link>
-  );
-}
-
-// Success story card component
-function SuccessStoryCard({ title, description, imageURL, author }) {
-  return (
-    <div className="card">
-      <img
-        src={imageURL}
-        alt="success story"
+      )}
+      <div
+        className="card-content unified-card-content"
         style={{
-          width: '100%',
-          height: 'auto',
-          borderTopLeftRadius: '0.5rem',
-          borderTopRightRadius: '0.5rem',
+          minHeight: '260px',
+          width: '320px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
         }}
-      />
-      <div className="card-content">
-        <p style={{
-          fontWeight: 'bold',
-          fontSize: '1.1rem',
-          marginBottom: '0.5rem',
-          color: '#2d3748'
-        }}>
-          {title} {/* Shows: Raised ₹X */}
-        </p>
-
-        <p className="card-description" style={{ marginBottom: '1rem' }}>
-          {description} {/* Shows: updates */}
-        </p>
-
-        <p style={{ fontSize: '0.875rem', color: '#718096' }}>
-        </p>
+      >
+        <div>
+          {isCampaign && (
+            <div className="card-category-row">
+              <span className="card-category-badge" style={{ background: getCategoryColor(props.category) }}>
+                {props.category}
+              </span>
+            </div>
+          )}
+          <h3 className="card-title">{isCampaign ? props.name : props.title}</h3>
+          <p className="card-description">{isCampaign ? props.description : props.description}</p>
+          {isCampaign ? (
+            <>
+              <p className="card-raised"><strong>₹{props.balance.toLocaleString()}</strong> raised</p>
+              <p className="card-target">Target: ₹{props.target.toLocaleString()}</p>
+              <div className="card-progress">
+                <div
+                  className="card-progress-bar"
+                  style={{ width: `${Math.min(progressPercentage, 100)}%` }}
+                ></div>
+              </div>
+              <p className="card-creator">by {props.creatorId}</p>
+            </>
+          ) : (
+            <>
+              <p className="card-success-creator">Creator: {props.userName}</p>
+              <p className="card-success-dates">{props.startDate} – {props.endDate}</p>
+              <p className="card-success-fund">Fund Raised: {props.fundRaised}</p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -126,6 +100,32 @@ export default function Home() {
   const [campaignList, setCampaignList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [successStories, setSuccessStories] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Carousel index for success stories (start index for 3 visible)
+  const [storyIndex, setStoryIndex] = useState(0);
+  // Carousel index for campaigns (start index for 3 visible)
+  const [campaignIndex, setCampaignIndex] = useState(0);
+  
+    useEffect(() => {
+      // Use the proper auth system to check login status
+      const loginStatus = AuthStorage.isLoggedIn();
+      console.log("User logged in status:", loginStatus); // Debug log
+      setIsLoggedIn(loginStatus);
+  
+      // Listen for login status changes
+      const handleLoginStatusChange = () => {
+        const newStatus = AuthStorage.isLoggedIn();
+        console.log("Login status changed:", newStatus);
+        setIsLoggedIn(newStatus);
+      };
+  
+      window.addEventListener('loginStatusChanged', handleLoginStatusChange);
+      
+      // Cleanup event listener
+      return () => {
+        window.removeEventListener('loginStatusChanged', handleLoginStatusChange);
+      };
+    }, []);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/campaign/active")
@@ -156,27 +156,31 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-  fetch("http://localhost:8080/api/successstories")
-    .then(res => res.json())
-    .then(data => {
-      console.log("Fetched success stories:", data);
-
-      const formatted = data.map(story => ({
-        id: story.successId,
-        title: `Raised ₹${story.fundRaised?.toLocaleString() || 0}`,
-        description: story.updates,
-        imageURL: `http://localhost:8080/api/successstories/image/${story.successId}`,
-        author: "BetterFund"
-      }));
-      setSuccessStories(formatted);
-    })
-    .catch(err => {
-      console.error("Error fetching success stories:", err);
-      setSuccessStories([]);
-    });
-}, []);
-
-
+    fetch("http://localhost:8080/api/successstories")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Fetched success stories:", data);
+        const formatted = data.map(story => ({
+          id: story.successId,
+          userName: story.userName,
+          title: story.campaignTitle,
+          startDate: new Date(story.campaignStartDate).toLocaleDateString('en-IN', {
+            day: '2-digit', month: 'short', year: 'numeric'
+          }),
+          endDate: new Date(story.campaignEndDate).toLocaleDateString('en-IN', {
+            day: '2-digit', month: 'short', year: 'numeric'
+          }),
+          fundRaised: `₹${story.fundRaised?.toLocaleString() || 0}`,
+          description: story.updates,
+          imageURL: `http://localhost:8080${story.imageURL}`
+        }));
+        setSuccessStories(formatted);
+      })
+      .catch(err => {
+        console.error("Error fetching success stories:", err);
+        setSuccessStories([]);
+      });
+  }, []);
 
   const categories = ['All', ...new Set(campaignList.map(c => c.category))];
 
@@ -207,19 +211,6 @@ export default function Home() {
           BetterFund’s <span style={{ fontWeight: 700, fontSize: '1.2rem', color: '#2c7a7b' }}>0%</span> Platform fees* ensures maximum funds for you
         </div>
       </div>
-      {/* <div className="container">
-        <h1 style={{
-          fontSize: '3rem',
-          marginBottom: '2rem',
-          color: '#2d3748'
-        }}>
-          Crowdfunding for Social Welfare <br />
-          Transparent & Secure 😄
-        </h1>
-        <Link to="/campaign/new" className="btn-login">
-          Create Campaign
-        </Link>
-      </div> */}
 
       <div className="container">
         <h2 style={{
@@ -239,7 +230,7 @@ export default function Home() {
           {categories.map(category => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => { setSelectedCategory(category); setCampaignIndex(0); }}
               style={{
                 padding: '0.5rem 1rem',
                 border: 'none',
@@ -258,10 +249,44 @@ export default function Home() {
         </div>
 
         {filteredCampaigns.length > 0 ? (
-          <div className="grid">
-            {filteredCampaigns.map((el, i) => (
-              <CampaignCard key={i} {...el} />
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+            <button
+              onClick={() => setCampaignIndex((prev) => prev === 0 ? Math.max(filteredCampaigns.length - 3, 0) : prev - 1)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                color: '#2c7a7b',
+                padding: '0 0.5rem'
+              }}
+              aria-label="Previous Campaigns"
+              disabled={filteredCampaigns.length <= 3}
+            >
+              &#8592;
+            </button>
+            <div style={{ display: 'flex', gap: '1rem', flex: 1, justifyContent: 'center' }}>
+              {filteredCampaigns.slice(campaignIndex, campaignIndex + 3).map((el, i) => (
+                <Link to={`/campaign/${el.id}`} style={{ textDecoration: 'none' }} key={el.id || i}>
+                  <UnifiedCard {...el} />
+                </Link>
+              ))}
+            </div>
+            <button
+              onClick={() => setCampaignIndex((prev) => prev + 1 >= filteredCampaigns.length - 2 ? 0 : prev + 1)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                color: '#2c7a7b',
+                padding: '0 0.5rem'
+              }}
+              aria-label="Next Campaigns"
+              disabled={filteredCampaigns.length <= 3}
+            >
+              &#8594;
+            </button>
           </div>
         ) : (
           <div className="grid">
@@ -276,7 +301,7 @@ export default function Home() {
       </div>
 
       {/* Success Stories Section */}
-      <div className="container" style={{ marginTop: '4rem' }}>
+      <div className="container" style={{ marginTop: '4rem', maxWidth: 1200, textAlign: 'center' }}>
         <h2 style={{
           fontSize: '2rem',
           marginBottom: '1rem',
@@ -286,10 +311,42 @@ export default function Home() {
         </h2>
 
         {successStories.length > 0 ? (
-          <div className="grid">
-            {successStories.map((story, index) => (
-              <SuccessStoryCard key={index} {...story} />
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+            <button
+              onClick={() => setStoryIndex((prev) => prev === 0 ? Math.max(successStories.length - 3, 0) : prev - 1)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                color: '#2c7a7b',
+                padding: '0 0.5rem'
+              }}
+              aria-label="Previous Stories"
+              disabled={successStories.length <= 3}
+            >
+              &#8592;
+            </button>
+            <div style={{ display: 'flex', gap: '1rem', flex: 1, justifyContent: 'center' }}>
+              {successStories.slice(storyIndex, storyIndex + 3).map((story, idx) => (
+                <UnifiedCard key={story.id || idx} {...story} />
+              ))}
+            </div>
+            <button
+              onClick={() => setStoryIndex((prev) => prev + 1 >= successStories.length - 2 ? 0 : prev + 1)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                color: '#2c7a7b',
+                padding: '0 0.5rem'
+              }}
+              aria-label="Next Stories"
+              disabled={successStories.length <= 3}
+            >
+              &#8594;
+            </button>
           </div>
         ) : (
           <p style={{ color: '#718096' }}>No success stories found.</p>
@@ -321,14 +378,26 @@ export default function Home() {
             text="The funds raised can be withdrawn directly to the recipient when approved by the campaign creator and platform admins."
           />
         </div>
-         <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-                  <h3 style={{ marginBottom: '1rem' }}>
-                    For any queries or suggestions:{' '}
-                    
-                    |{' '}
-                    <Link to="/feedback" className="cta-button">Give Feedback</Link>
-                  </h3>
-                </div>
+
+          {/* Only show feedback section if user is logged in */}
+                 {isLoggedIn ? (
+                   <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                     <h3 style={{ marginBottom: '1rem', color: '#2d3748' }}>
+                       For any queries or suggestions:{' '}
+                       <Link 
+                         to="/feedback" 
+                         className="cta-button"
+                         style={{
+                           marginLeft: '0.5rem',
+                           color: '#3182ce',
+                           textDecoration: 'underline'
+                         }}
+                       >
+                         Give Feedback
+                       </Link>
+                     </h3>
+                   </div>
+                 ) : null}
       </div>
     </div>
   );

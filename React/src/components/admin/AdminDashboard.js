@@ -74,6 +74,20 @@ export default function AdminDashboard() {
     }
   };
 
+    const [completedCampaigns, setCompletedCampaigns] = useState([]);
+  // Fetch completed campaigns from backend
+  useEffect(() => {
+    if (activeTab === "stories") {
+      axios.get("http://localhost:8080/api/SuccessStories/completed") // Make sure backend route matches
+        .then((res) => {
+          setCompletedCampaigns(res.data);
+        })
+        .catch((err) => {
+          console.error("Error fetching completed campaigns", err);
+        });
+    }
+  }, [activeTab]);
+
   /* ---------- PENDING CAMPAIGNS ---------- */
   const fetchPendingCampaigns = () => {
     const token = localStorage.getItem('token');
@@ -183,25 +197,31 @@ export default function AdminDashboard() {
   };
 
   /* ---------- CREATE SUCCESS STORY ---------- */
-  const handleCreateStory = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
-    if (!token) return;
+  const handleCreateStory = () => {
+    if (!storyForm.campaignId) {
+      alert("Please select a campaign");
+      return;
+    }
 
     const formData = new FormData();
-    formData.append('Updates', storyForm.updates.trim());
-    formData.append('FundRaised', parseFloat(storyForm.fundRaised));
-    if (storyForm.images) formData.append('images', storyForm.images);
-
-    try {
-      await axios.post('http://localhost:8080/api/successstories', formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      alert('Success story created!');
-      setStoryForm({ updates: '', fundRaised: '', images: null });
-    } catch (err) {
-      alert('Error: ' + (err.response?.data || err.message));
+    formData.append("campaignId", storyForm.campaignId);
+    formData.append("updates", storyForm.updates);
+    if (storyForm.images) {
+      formData.append("images", storyForm.images);
     }
+
+    axios
+      .post("http://localhost:8080/api/successstories", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(() => {
+        alert("Story saved successfully!");
+        setStoryForm({ campaignId: "", updates: "", images: null });
+      })
+      .catch((err) => {
+        console.error("Error saving story:", err);
+        alert("Failed to save story");
+      });
   };
 
   /* ---------- TABS ---------- */
@@ -304,7 +324,7 @@ export default function AdminDashboard() {
                       <div style={{ marginTop: '1rem' }}>
                         <button
                           onClick={() => handleViewDocuments(c)}
-                          className="btn"
+                          className="btn-login"
                         >
                           📄 View Documents
                         </button>
@@ -328,88 +348,66 @@ export default function AdminDashboard() {
           </>
         )}
 
-        {/* Create Success Story */}
-        {activeTab === 'stories' && (
-          <>
-            <h2>Create Success Story</h2>
-            <div
-              className="card"
-              style={{ maxWidth: 600, margin: '0 auto' }}
-            >
-              <div
-                className="card-content"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem',
-                }}
-              >
-                <label style={{ fontWeight: 'bold', color: '#2d3748' }}>
-                  Updates / Description
-                </label>
-                <textarea
-                  required
-                  rows="5"
-                  value={storyForm.updates}
-                  onChange={(e) =>
-                    setStoryForm({ ...storyForm, updates: e.target.value })
-                  }
-                  style={{
-                    padding: '0.75rem',
-                    fontSize: '1rem',
-                    border: '1px solid #cbd5e0',
-                    borderRadius: '0.375rem',
-                    resize: 'vertical',
-                  }}
-                />
+{activeTab === 'stories' && (
+  <>
+    <div style={{ padding: "1rem" }}>
+      <h2>Create Success Story</h2>
+      <div className="card" style={{ maxWidth: 600, margin: "0 auto" }}>
+        <div
+          className="card-content"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          {/* Select Completed Campaign */}
+          <label style={{ fontWeight: "bold" }}>Select Completed Campaign</label>
+          <select
+            required
+            value={storyForm.campaignId}
+            onChange={(e) =>
+              setStoryForm({ ...storyForm, campaignId: e.target.value })
+            }
+          >
+            <option value="">-- Select Campaign --</option>
+            {completedCampaigns.map((campaign) => (
+              <option key={campaign.campaignId} value={campaign.campaignId}>
+                {campaign.title}
+              </option>
+            ))}
+          </select>
 
-                <label style={{ fontWeight: 'bold', color: '#2d3748' }}>
-                  Amount Raised (₹)
-                </label>
-                <input
-                  type="number"
-                  required
-                  value={storyForm.fundRaised}
-                  onChange={(e) =>
-                    setStoryForm({ ...storyForm, fundRaised: e.target.value })
-                  }
-                  style={{
-                    padding: '0.75rem',
-                    fontSize: '1rem',
-                    border: '1px solid #cbd5e0',
-                    borderRadius: '0.375rem',
-                  }}
-                />
+          {/* Updates / Description */}
+          <label style={{ fontWeight: "bold" }}>Updates / Description</label>
+          <textarea
+            required
+            rows="5"
+            value={storyForm.updates}
+            onChange={(e) =>
+              setStoryForm({ ...storyForm, updates: e.target.value })
+            }
+          />
 
-                <label style={{ fontWeight: 'bold', color: '#2d3748' }}>
-                  Image
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) =>
-                    setStoryForm({ ...storyForm, images: e.target.files[0] })
-                  }
-                  style={{
-                    padding: '0.5rem',
-                    fontSize: '1rem',
-                    border: '1px solid #cbd5e0',
-                    borderRadius: '0.375rem',
-                  }}
-                />
+          {/* Image Upload */}
+          <label style={{ fontWeight: "bold" }}>Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) =>
+              setStoryForm({ ...storyForm, images: e.target.files[0] })
+            }
+          />
 
-                <button
-                  type="submit"
-                  onClick={handleCreateStory}
-                  className="btn"
-                  style={{ alignSelf: 'flex-start' }}
-                >
-                  Save Story
-                </button>
-              </div>
-            </div>
-          </>
-        )}
+          {/* Save Button */}
+          <button type="submit" onClick={handleCreateStory} className="btn-login">
+            Save Story
+          </button>
+        </div>
+      </div>
+    </div>
+  </>
+)}
 
         {/* Manage Stories */}
         {activeTab === 'manageStories' && (
